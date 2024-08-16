@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">cmdr tracker</string>
+    <string name="player_1">Player 1</string>
+    <string name="player_2">Player 2</string>
+    <string name="_20">20</string>
+    <string name="_1">1</string>
+    <string name="player1deckname">player1DeckName</string>
+    <string name="player_1_name">Player 1 Name</string>
+
+    <string-array name="player_names">
+        <item>Ale</item>
+        <item>Domi</item>
+        <item>Domi69</item>
+        <item>Elie</item>
+        <item>Fubu</item>
+        <item>Guy</item>
+        <item>Lucien</item>
+        <item>Lueku</item>
+        <item>Nico</item>
+        <item>Nils</item>
+        <item>Sandro</item>
+        <item>Tobi</item>
+        <item>Vince</item>
+    </string-array>
+
+    <string-array name="deck_names">
+        <item>Deck A</item>
+        <item>Deck B</item>
+        <item>Deck C</item>
+        <item>Deck D</item>
+    </string-array>
+
+</resources>
