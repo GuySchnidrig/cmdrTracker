@@ -77,7 +77,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:gravity="center"
-                    android:text="20"
+                    android:text="@string/starting_life"
                     android:textColor="#f1e6b2"
                     android:textSize="60sp" />
 
@@ -171,7 +171,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:gravity="center"
-                    android:text="20"
+                    android:text="@string/starting_life"
                     android:textColor="#f1e6b2"
                     android:textSize="60sp" />
 
@@ -263,7 +263,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:gravity="center"
-                    android:text="20"
+                    android:text="@string/starting_life"
                     android:textColor="#f1e6b2"
                     android:textSize="60sp" />
 
@@ -355,7 +355,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:gravity="center"
-                    android:text="20"
+                    android:text="@string/starting_life"
                     android:textColor="#f1e6b2"
                     android:textSize="60sp" />
 

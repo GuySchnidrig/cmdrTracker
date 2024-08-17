@@ -6,6 +6,7 @@
     <string name="_1">1</string>
     <string name="player1deckname">player1DeckName</string>
     <string name="player_1_name">Player 1 Name</string>
+    <string name="starting_life">40</string>
 
     <string-array name="player_names">
         <item>Ale</item>
