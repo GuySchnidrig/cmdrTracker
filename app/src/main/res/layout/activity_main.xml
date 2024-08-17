@@ -11,11 +11,13 @@
         android:layout_height="match_parent"
         android:padding="1dp"
         app:columnCount="2"
-        android:background="#68656A">
+        android:background="#68656A"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Player 1 Tile -->
-
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -26,7 +28,6 @@
             android:rotation="180"
             app:layout_column="0"
             app:layout_columnWeight="1"
-            app:layout_row="0"
             app:layout_rowWeight="1">
 
             <LinearLayout
@@ -34,22 +35,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="0dp"
-                android:gravity="left">
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/player1Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Player 1"
-                    android:textColor="#f1e6b2"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/player1Deck"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginEnd="18dp"
                     android:textColor="#f1e6b2"
                     android:textSize="18sp" />
 
@@ -95,56 +87,93 @@
                     android:layout_height="wrap_content"
                     android:text="-"
                     android:textSize="18sp" />
+            </LinearLayout>
+
+            <!-- DeckName -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/player1Deck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:textColor="#f1e6b2"
+                    android:textSize="18sp" />
+
 
             </LinearLayout>
 
-
         </LinearLayout>
+
         <!-- Player 2 Tile -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_margin="4dp"
             android:orientation="vertical"
             android:gravity="center"
             android:background="#4cbf62"
             android:padding="8dp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1"
-            app:layout_gravity="fill"
             android:rotation="180"
-            android:layout_margin="2dp">
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
 
-            <TextView
-                android:id="@+id/player2Name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="344dp"
                 android:layout_height="wrap_content"
-                android:text="Player 2"
-                android:textSize="18sp"
-                android:textColor="#f1e6b2" />
+                android:layout_gravity="center"
+                android:layout_margin="0dp"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/player2Life"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20"
-                android:textSize="36sp"
-                android:textColor="#f1e6b2"
-                android:layout_marginTop="8dp"
-                android:gravity="center" />
+                <TextView
+                    android:id="@+id/player2Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Player 2"
+                    android:textColor="#f1e6b2"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/player2Deck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="18dp"
-                android:textColor="#f1e6b2"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/player2Time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time"
+                    android:textColor="#f1e6b2"
+                    android:textSize="18sp" />
 
+            </LinearLayout>
+
+            <!-- Container for Life Count and Buttons -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/player2Plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/player2Life"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:text="20"
+                    android:textColor="#f1e6b2"
+                    android:textSize="60sp" />
 
                 <Button
                     android:id="@+id/player2Minus"
@@ -152,14 +181,25 @@
                     android:layout_height="wrap_content"
                     android:text="-"
                     android:textSize="18sp" />
+            </LinearLayout>
 
-                <Button
-                    android:id="@+id/player2Plus"
+            <!-- DeckName -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/player2Deck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textSize="18sp"
-                    android:layout_marginStart="8dp" />
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:textColor="#f1e6b2"
+                    android:textSize="18sp" />
+
 
             </LinearLayout>
         </LinearLayout>
@@ -168,46 +208,64 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_margin="4dp"
             android:orientation="vertical"
             android:gravity="center"
             android:background="#6D597A"
             android:padding="8dp"
             app:layout_columnWeight="1"
-            app:layout_rowWeight="1"
-            app:layout_gravity="fill"
-            android:layout_margin="2dp">
+            app:layout_rowWeight="1">
 
-            <TextView
-                android:id="@+id/player3Name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="344dp"
                 android:layout_height="wrap_content"
-                android:text="Player 3"
-                android:textSize="18sp"
-                android:textColor="#f1e6b2" />
+                android:layout_gravity="center"
+                android:layout_margin="0dp"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/player3Life"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20"
-                android:textSize="36sp"
-                android:textColor="#f1e6b2"
-                android:layout_marginTop="8dp"
-                android:gravity="center" />
+                <TextView
+                    android:id="@+id/player3Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Player 3"
+                    android:textColor="#f1e6b2"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/player3Deck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="18dp"
-                android:textColor="#f1e6b2"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/player3Time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time"
+                    android:textColor="#f1e6b2"
+                    android:textSize="18sp" />
 
+            </LinearLayout>
+
+            <!-- Container for Life Count and Buttons -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/player3Plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/player3Life"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:text="20"
+                    android:textColor="#f1e6b2"
+                    android:textSize="60sp" />
 
                 <Button
                     android:id="@+id/player3Minus"
@@ -215,14 +273,25 @@
                     android:layout_height="wrap_content"
                     android:text="-"
                     android:textSize="18sp" />
+            </LinearLayout>
 
-                <Button
-                    android:id="@+id/player3Plus"
+            <!-- DeckName -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/player3Deck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textSize="18sp"
-                    android:layout_marginStart="8dp" />
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:textColor="#f1e6b2"
+                    android:textSize="18sp" />
+
 
             </LinearLayout>
         </LinearLayout>
@@ -232,45 +301,63 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
+            android:layout_margin="4dp"
             android:gravity="center"
             android:background="#4ca9bf"
             android:padding="8dp"
             app:layout_columnWeight="1"
-            app:layout_rowWeight="1"
-            app:layout_gravity="fill"
-            android:layout_margin="2dp">
+            app:layout_rowWeight="1">
 
-            <TextView
-                android:id="@+id/player4Name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="344dp"
                 android:layout_height="wrap_content"
-                android:text="Player 4"
-                android:textSize="18sp"
-                android:textColor="#f1e6b2" />
+                android:layout_gravity="center"
+                android:layout_margin="0dp"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/player4Life"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20"
-                android:textSize="36sp"
-                android:textColor="#f1e6b2"
-                android:layout_marginTop="8dp"
-                android:gravity="center" />
+                <TextView
+                    android:id="@+id/player4Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Player 4"
+                    android:textColor="#f1e6b2"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/player4Deck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="18dp"
-                android:textColor="#f1e6b2"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/player4Time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time"
+                    android:textColor="#f1e6b2"
+                    android:textSize="18sp" />
 
+            </LinearLayout>
+
+            <!-- Container for Life Count and Buttons -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/player4Plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/player4Life"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:text="20"
+                    android:textColor="#f1e6b2"
+                    android:textSize="60sp" />
 
                 <Button
                     android:id="@+id/player4Minus"
@@ -278,18 +365,45 @@
                     android:layout_height="wrap_content"
                     android:text="-"
                     android:textSize="18sp" />
+            </LinearLayout>
 
-                <Button
-                    android:id="@+id/player4Plus"
+            <!-- DeckName -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/player4Deck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textSize="18sp"
-                    android:layout_marginStart="8dp" />
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:textColor="#f1e6b2"
+                    android:textSize="18sp" />
+
 
             </LinearLayout>
         </LinearLayout>
 
     </androidx.gridlayout.widget.GridLayout>
+    <!-- Overlay Button -->
 
+    <Button
+        android:id="@+id/overlayButton"
+        android:layout_width="110dp"
+        android:layout_height="97dp"
+        android:layout_margin="14dp"
+        android:background="@drawable/button_background"
+        android:text="Pass Turn"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
