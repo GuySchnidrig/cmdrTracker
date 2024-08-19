@@ -26,6 +26,12 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_columnWeight="1" />
+    <!-- Player 2 Name -->
+    <Spinner
+        android:id="@+id/player2Spinner"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_columnWeight="1" />
 
     <!-- Player 1 Deck -->
     <Spinner
@@ -34,12 +40,7 @@
         android:layout_height="50dp"
         android:layout_columnWeight="1"/>
 
-    <!-- Player 2 Name -->
-    <Spinner
-        android:id="@+id/player2Spinner"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_columnWeight="1" />
+
 
     <!-- Player 2 Deck -->
     <Spinner
@@ -54,19 +55,16 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_columnWeight="1"/>
-
-    <!-- Player 3 Deck -->
+    <!-- Player 4 Name -->
     <Spinner
-        android:id="@+id/player3SpinnerDeck"
+        android:id="@+id/player4Spinner"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_columnWeight="1" />
 
-    <!-- Player 4 Name -->
-
-
+    <!-- Player 3 Deck -->
     <Spinner
-        android:id="@+id/player4Spinner"
+        android:id="@+id/player3SpinnerDeck"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_columnWeight="1" />

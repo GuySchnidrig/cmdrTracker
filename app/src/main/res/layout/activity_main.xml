@@ -391,8 +391,24 @@
     </androidx.gridlayout.widget.GridLayout>
     <!-- Overlay Button -->
 
+
+    <TextView
+        android:id="@+id/overallTurnCountTextView"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_margin="14dp"
+        android:text="Turn: "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.05"
+        android:textColor="#f1e6b2"
+        android:textSize="30sp" />
+
     <Button
-        android:id="@+id/overlayButton"
+        android:id="@+id/passTurnButton"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_margin="14dp"
