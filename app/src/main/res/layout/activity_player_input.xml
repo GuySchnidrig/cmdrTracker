@@ -24,68 +24,85 @@
     <Spinner
         android:id="@+id/player1Spinner"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_columnWeight="1" />
 
     <!-- Player 1 Deck -->
     <Spinner
         android:id="@+id/player1SpinnerDeck"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_columnWeight="1"/>
 
     <!-- Player 2 Name -->
     <Spinner
         android:id="@+id/player2Spinner"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_columnWeight="1" />
 
     <!-- Player 2 Deck -->
     <Spinner
         android:id="@+id/player2SpinnerDeck"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_columnWeight="1" />
 
     <!-- Player 3 Name -->
     <Spinner
         android:id="@+id/player3Spinner"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_columnWeight="1"/>
 
     <!-- Player 3 Deck -->
     <Spinner
         android:id="@+id/player3SpinnerDeck"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_columnWeight="1" />
 
     <!-- Player 4 Name -->
 
-    <!-- Player 4 Deck -->
+
     <Spinner
         android:id="@+id/player4Spinner"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_columnWeight="1" />
 
+    <!-- Player 4 Deck -->
     <Spinner
         android:id="@+id/player4SpinnerDeck"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_columnWeight="1" />
 
-    <!-- Submit Button -->
+    <!-- Start game -->
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="301dp"
         android:layout_height="64dp"
-        android:layout_row="4"
-        android:layout_columnSpan="2"
-        android:layout_gravity="center_horizontal"
+        android:layout_columnSpan="1"
+        android:layout_rowSpan="2"
+        android:layout_gravity="left"
         android:layout_marginTop="8dp"
         android:text="Start Game!" />
+
+    <!-- Submit Player -->
+    <Button
+        android:id="@+id/submitNewPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="Add New Player" />
+
+    <!-- Submit Deck -->
+    <Button
+        android:id="@+id/submitNewDeck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="Add New Deck"/>
 
 </GridLayout>
