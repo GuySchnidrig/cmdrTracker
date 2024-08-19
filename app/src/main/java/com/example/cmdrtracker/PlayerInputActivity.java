@@ -1,17 +1,16 @@
 package com.example.cmdrtracker;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class PlayerInputActivity extends AppCompatActivity {
@@ -19,10 +18,15 @@ public class PlayerInputActivity extends AppCompatActivity {
     Spinner player1Spinner, player2Spinner, player3Spinner, player4Spinner;
     Spinner player1SpinnerDeck, player2SpinnerDeck, player3SpinnerDeck, player4SpinnerDeck;
 
+    DatabaseHelper myDB;
+    ArrayList<String> namesList, deckList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_input);
+
+        myDB = new DatabaseHelper(PlayerInputActivity.this);
 
         // Initialize spinners
         player1Spinner = findViewById(R.id.player1Spinner);
@@ -36,29 +40,31 @@ public class PlayerInputActivity extends AppCompatActivity {
         player4SpinnerDeck = findViewById(R.id.player4SpinnerDeck);
 
         // Read names from the text file
-        ArrayList<String> namesList = readNamesFromFile();
 
-        ArrayList<String> deckList = readNamesFromFile2();
+        namesList = new ArrayList<>();
+        deckList = new ArrayList<>();
+        storePlayerNamesInArrays();
+        storeDeckNamesInArrays();
 
         // Create an ArrayAdapter using the namesList and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+        ArrayAdapter<String> namesAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, namesList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        namesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        ArrayAdapter<String> adapterdeckList = new ArrayAdapter<>(this,
+        ArrayAdapter<String> deckAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, deckList);
-        adapterdeckList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        deckAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Apply the adapter to the spinners
-        player1Spinner.setAdapter(adapter);
-        player2Spinner.setAdapter(adapter);
-        player3Spinner.setAdapter(adapter);
-        player4Spinner.setAdapter(adapter);
+        player1Spinner.setAdapter(namesAdapter);
+        player2Spinner.setAdapter(namesAdapter);
+        player3Spinner.setAdapter(namesAdapter);
+        player4Spinner.setAdapter(namesAdapter);
 
-        player1SpinnerDeck.setAdapter(adapterdeckList);
-        player2SpinnerDeck.setAdapter(adapterdeckList);
-        player3SpinnerDeck.setAdapter(adapterdeckList);
-        player4SpinnerDeck.setAdapter(adapterdeckList);
+        player1SpinnerDeck.setAdapter(deckAdapter);
+        player2SpinnerDeck.setAdapter(deckAdapter);
+        player3SpinnerDeck.setAdapter(deckAdapter);
+        player4SpinnerDeck.setAdapter(deckAdapter);
 
         // Handle submit button click
         Button submitButton = findViewById(R.id.submitBtn);
@@ -94,35 +100,26 @@ public class PlayerInputActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<String> readNamesFromFile() {
-        ArrayList<String> namesList = new ArrayList<>();
-        try {
-            InputStream inputStream = getResources().openRawResource(R.raw.player_names); // names is the name of the file without extension
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                namesList.add(line);
+    void storePlayerNamesInArrays() {
+        Cursor cursor = myDB.readAlLPlayerNames();
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()) {
+                namesList.add(cursor.getString(0));
             }
-            reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+
         }
-        return namesList;
     }
 
-    private ArrayList<String> readNamesFromFile2() {
-        ArrayList<String> namesList = new ArrayList<>();
-        try {
-            InputStream inputStream = getResources().openRawResource(R.raw.deck_names); // names is the name of the file without extension
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                namesList.add(line);
+    void storeDeckNamesInArrays() {
+        Cursor cursor = myDB.readAlLDeckNames();
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()) {
+                deckList.add(cursor.getString(0));
             }
-            reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return namesList;
     }
 }

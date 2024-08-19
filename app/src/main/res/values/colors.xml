@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="main_grey">#68656A</color>
+    <color name="secondary_yellow">#f1e6b2</color>
     <color name="colorPlayer1">#bf624c</color>
     <color name="colorPlayer2">#4cbf62</color>
     <color name="colorPlayer3">#6D597A</color>
     <color name="colorPlayer4">#4ca9bf</color>
+    <color name="your_button_color">#f1e6b2</color> <!-- Ensure this is the correct color for dark mode -->
+
 </resources>
