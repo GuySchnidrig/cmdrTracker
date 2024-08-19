@@ -76,16 +76,13 @@
         android:layout_height="50dp"
         android:layout_columnWeight="1" />
 
-    <!-- Start game -->
-    <Button
-        android:id="@+id/submitBtn"
-        android:layout_width="301dp"
-        android:layout_height="64dp"
-        android:layout_columnSpan="1"
-        android:layout_rowSpan="2"
-        android:layout_gravity="left"
+    <Spinner
+        android:id="@+id/startingPlayerSpinner"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_columnWeight="1"
         android:layout_marginTop="8dp"
-        android:text="Start Game!" />
+        android:text="Set Starting Player" />
 
     <!-- Submit Player -->
     <Button
@@ -94,6 +91,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:text="Add New Player" />
+
+    <!-- Start game -->
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="1"
+        android:layout_rowSpan="1"
+        android:layout_gravity="left"
+        android:layout_marginTop="8dp"
+        android:text="Start Game!" />
+
 
     <!-- Submit Deck -->
     <Button
