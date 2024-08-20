@@ -2,6 +2,7 @@ package com.example.cmdrtracker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     TextView player1Life, player2Life, player3Life, player4Life;
     TextView player1Name, player2Name, player3Name, player4Name;
     TextView player1Deck, player2Deck, player3Deck, player4Deck;
+    TextView player1Time, player2Time, player3Time, player4Time;
     TextView overallTurnCountTextView; // Add TextView for overall turn count
 
     private static final int PLAYER_INPUT_REQUEST = 1;
@@ -23,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
     private int currentPlayerIndex;
     private int startingPositionIndex;
     private int overallTurnCount = 1; // Variable to track overall turn count
-    private int TurnCountStartingIndex;
+    private long[] startTimes = new long[4]; // To track the start time of each player's turn
+    private boolean[] isRunning = new boolean[4]; // To check if the timer is running for each player
+    private long[] totalTimes = new long[4]; // To store total times for each player
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +46,17 @@ public class MainActivity extends AppCompatActivity {
         player3Name = findViewById(R.id.player3Name);
         player4Name = findViewById(R.id.player4Name);
 
-        // Initialize Name TextViews
+        // Initialize Deck TextViews
         player1Deck = findViewById(R.id.player1Deck);
         player2Deck = findViewById(R.id.player2Deck);
         player3Deck = findViewById(R.id.player3Deck);
         player4Deck = findViewById(R.id.player4Deck);
 
+        // Initialize Time TextViews
+        player1Time = findViewById(R.id.player1Time);
+        player2Time = findViewById(R.id.player2Time);
+        player3Time = findViewById(R.id.player3Time);
+        player4Time = findViewById(R.id.player4Time);
 
         // Initialize Turn Count TextView
         overallTurnCountTextView = findViewById(R.id.overallTurnCountTextView);
@@ -85,11 +94,9 @@ public class MainActivity extends AppCompatActivity {
 
         passTurnButton.setOnClickListener(v -> passTurn());
 
-
         // Start PlayerInputActivity to get player names
         Intent intent = new Intent(MainActivity.this, PlayerInputActivity.class);
         startActivityForResult(intent, PLAYER_INPUT_REQUEST);
-
 
         // Initial highlight setup
         // highlightActivePlayer();
@@ -129,6 +136,14 @@ public class MainActivity extends AppCompatActivity {
                 currentPlayerIndex = -1;
             }
 
+            // Initialize totalTimes array to zero
+            for (int i = 0; i < totalTimes.length; i++) {
+                totalTimes[i] = 0;
+            }
+
+            // Initialize times display
+            updateDisplayTimes();
+
             highlightActivePlayer();
             updateOverallTurnCountDisplay();
 
@@ -148,18 +163,23 @@ public class MainActivity extends AppCompatActivity {
         player1Name.setTextColor(ContextCompat.getColor(this, R.color.main_black));
         player1Deck.setTextColor(ContextCompat.getColor(this, R.color.main_black));
         player1Life.setTextColor(ContextCompat.getColor(this, R.color.main_black));
+        player1Time.setTextColor(ContextCompat.getColor(this, R.color.main_black));
 
         player2Name.setTextColor(ContextCompat.getColor(this, R.color.main_black));
         player2Deck.setTextColor(ContextCompat.getColor(this, R.color.main_black));
         player2Life.setTextColor(ContextCompat.getColor(this, R.color.main_black));
+        player2Time.setTextColor(ContextCompat.getColor(this, R.color.main_black));
 
         player3Name.setTextColor(ContextCompat.getColor(this, R.color.main_black));
         player3Deck.setTextColor(ContextCompat.getColor(this, R.color.main_black));
         player3Life.setTextColor(ContextCompat.getColor(this, R.color.main_black));
+        player3Time.setTextColor(ContextCompat.getColor(this, R.color.main_black));
 
         player4Name.setTextColor(ContextCompat.getColor(this, R.color.main_black));
         player4Deck.setTextColor(ContextCompat.getColor(this, R.color.main_black));
         player4Life.setTextColor(ContextCompat.getColor(this, R.color.main_black));
+        player4Time.setTextColor(ContextCompat.getColor(this, R.color.main_black));
+
 
         // Highlight the active player
         switch (currentPlayerIndex) {
@@ -167,41 +187,76 @@ public class MainActivity extends AppCompatActivity {
                 player1Name.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
                 player1Deck.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
                 player1Life.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
+                player1Time.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
                 break;
             case 1:
                 player2Name.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
                 player2Deck.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
                 player2Life.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
+                player2Time.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
+
                 break;
             case 2:
                 player3Name.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
                 player3Deck.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
                 player3Life.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
+                player3Time.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
                 break;
             case 3:
                 player4Name.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
                 player4Deck.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
                 player4Life.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
+                player4Time.setTextColor(ContextCompat.getColor(this, R.color.secondary_yellow));
                 break;
         }
     }
 
     private void passTurn() {
+        // Stop the current player's timer
+        if (isRunning[currentPlayerIndex]) {
+            long elapsedTime = SystemClock.elapsedRealtime() - startTimes[currentPlayerIndex];
+            totalTimes[currentPlayerIndex] += elapsedTime;
+            isRunning[currentPlayerIndex] = false;
+        }
+
         // Move to the next player in the custom order
         currentTurnIndex = (currentTurnIndex + 1) % turnOrder.length;
         currentPlayerIndex = turnOrder[currentTurnIndex];
 
+        // Start the new player's timer
+        startTimes[currentPlayerIndex] = SystemClock.elapsedRealtime();
+        isRunning[currentPlayerIndex] = true;
 
         // If we have completed a full cycle, increment the overall turn count
         if (currentTurnIndex == startingPositionIndex) {
             overallTurnCount++;
             updateOverallTurnCountDisplay(); // Update the display for overall turn count
         }
+
         highlightActivePlayer();
+        updateDisplayTimes(); // Update the display with new times
     }
 
     private void updateOverallTurnCountDisplay() {
         // Update the TextView to display the overall turn count
         overallTurnCountTextView.setText("Turn: " + overallTurnCount);
+    }
+
+    private void updateDisplayTimes() {
+        for (int i = 0; i < 4; i++) {
+            long savedTime = totalTimes[i] + (isRunning[i] ? (SystemClock.elapsedRealtime() - startTimes[i]) : 0);
+            int minutes = (int) (savedTime / 60000);
+            int seconds = (int) (savedTime % 60000) / 1000;
+            TextView playerTimeView = null;
+            switch (i) {
+                case 0: playerTimeView = player1Time; break;
+                case 1: playerTimeView = player2Time; break;
+                case 2: playerTimeView = player3Time; break;
+                case 3: playerTimeView = player4Time; break;
+            }
+            if (playerTimeView != null) {
+                playerTimeView.setText(String.format("Time %d: %d:%02d", i + 1, minutes, seconds));
+            }
+        }
     }
 }
