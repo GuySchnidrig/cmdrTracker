@@ -1,8 +1,11 @@
 package com.example.cmdrtracker;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean[] isRunning = new boolean[4]; // To check if the timer is running for each player
     private long[] totalTimes = new long[4]; // To store total times for each player
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,46 +65,229 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Turn Count TextView
         overallTurnCountTextView = findViewById(R.id.overallTurnCountTextView);
 
-        // Initialize Buttons and set click listeners for Player 1
+        // Initialize Buttons for Player 1
         Button player1Plus = findViewById(R.id.player1Plus);
         Button player1Minus = findViewById(R.id.player1Minus);
 
-        player1Plus.setOnClickListener(v -> updateLife(player1Life, 1));
-        player1Minus.setOnClickListener(v -> updateLife(player1Life, -1));
-
-        // Initialize Buttons and set click listeners for Player 2
+        // Initialize Buttons for Player 2
         Button player2Plus = findViewById(R.id.player2Plus);
         Button player2Minus = findViewById(R.id.player2Minus);
 
-        player2Plus.setOnClickListener(v -> updateLife(player2Life, 1));
-        player2Minus.setOnClickListener(v -> updateLife(player2Life, -1));
-
-        // Initialize Buttons and set click listeners for Player 3
+        // Initialize Buttons for Player 3
         Button player3Plus = findViewById(R.id.player3Plus);
         Button player3Minus = findViewById(R.id.player3Minus);
 
-        player3Plus.setOnClickListener(v -> updateLife(player3Life, 1));
-        player3Minus.setOnClickListener(v -> updateLife(player3Life, -1));
-
-        // Initialize Buttons and set click listeners for Player 4
+        // Initialize Buttons for Player 4
         Button player4Plus = findViewById(R.id.player4Plus);
         Button player4Minus = findViewById(R.id.player4Minus);
 
-        player4Plus.setOnClickListener(v -> updateLife(player4Life, 1));
-        player4Minus.setOnClickListener(v -> updateLife(player4Life, -1));
+        // Create Handlers to run code at intervals while the buttons are held down
+        Handler handler1 = new Handler();
+        Handler handler2 = new Handler();
+        Handler handler3 = new Handler();
+        Handler handler4 = new Handler();
+
+        // Runnable for incrementing and decrementing life for each player
+        Runnable incrementRunnable1 = new Runnable() {
+            @Override
+            public void run() {
+                updateLife(player1Life, 1);
+                handler1.postDelayed(this, 200); // Run every 200ms
+            }
+        };
+        Runnable decrementRunnable1 = new Runnable() {
+            @Override
+            public void run() {
+                updateLife(player1Life, -1);
+                handler1.postDelayed(this, 200); // Run every 200ms
+            }
+        };
+
+        Runnable incrementRunnable2 = new Runnable() {
+            @Override
+            public void run() {
+                updateLife(player2Life, 1);
+                handler2.postDelayed(this, 200); // Run every 200ms
+            }
+        };
+        Runnable decrementRunnable2 = new Runnable() {
+            @Override
+            public void run() {
+                updateLife(player2Life, -1);
+                handler2.postDelayed(this, 200); // Run every 200ms
+            }
+        };
+
+        Runnable incrementRunnable3 = new Runnable() {
+            @Override
+            public void run() {
+                updateLife(player3Life, 1);
+                handler3.postDelayed(this, 200); // Run every 200ms
+            }
+        };
+        Runnable decrementRunnable3 = new Runnable() {
+            @Override
+            public void run() {
+                updateLife(player3Life, -1);
+                handler3.postDelayed(this, 200); // Run every 200ms
+            }
+        };
+
+        Runnable incrementRunnable4 = new Runnable() {
+            @Override
+            public void run() {
+                updateLife(player4Life, 1);
+                handler4.postDelayed(this, 200); // Run every 200ms
+            }
+        };
+        Runnable decrementRunnable4 = new Runnable() {
+            @Override
+            public void run() {
+                updateLife(player4Life, -1);
+                handler4.postDelayed(this, 200); // Run every 200ms
+            }
+        };
+
+        // Set onTouchListener for Player 1 buttons
+        player1Plus.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    handler1.post(incrementRunnable1);
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    handler1.removeCallbacks(incrementRunnable1);
+                    return true;
+            }
+            return false;
+        });
+
+        player1Minus.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    handler1.post(decrementRunnable1);
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    handler1.removeCallbacks(decrementRunnable1);
+                    return true;
+            }
+            return false;
+        });
+
+        // Set onTouchListener for Player 2 buttons
+        player2Plus.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    handler2.post(incrementRunnable2);
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    handler2.removeCallbacks(incrementRunnable2);
+                    return true;
+            }
+            return false;
+        });
+
+        player2Minus.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    handler2.post(decrementRunnable2);
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    handler2.removeCallbacks(decrementRunnable2);
+                    return true;
+            }
+            return false;
+        });
+
+        // Set onTouchListener for Player 3 buttons
+        player3Plus.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    handler3.post(incrementRunnable3);
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    handler3.removeCallbacks(incrementRunnable3);
+                    return true;
+            }
+            return false;
+        });
+
+        player3Minus.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    handler3.post(decrementRunnable3);
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    handler3.removeCallbacks(decrementRunnable3);
+                    return true;
+            }
+            return false;
+        });
+
+        // Set onTouchListener for Player 4 buttons
+        player4Plus.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    handler4.post(incrementRunnable4);
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    handler4.removeCallbacks(incrementRunnable4);
+                    return true;
+            }
+            return false;
+        });
+
+        player4Minus.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    handler4.post(decrementRunnable4);
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    handler4.removeCallbacks(decrementRunnable4);
+                    return true;
+            }
+            return false;
+        });
+
 
         // Initialize the "Pass Turn" button
         Button passTurnButton = findViewById(R.id.passTurnButton);
 
         passTurnButton.setOnClickListener(v -> passTurn());
 
+        Button menuButton = findViewById(R.id.endGameButton);
+        menuButton.setOnClickListener(v -> {
+
+            // Get the text from the TextView
+            int overallTurnCountEND = overallTurnCount;
+            String player1NameEND = player1Name.getText().toString();
+            String player1DeckEND = player1Deck.getText().toString();
+
+            // Create an Intent to start the new activity
+            Intent intent = new Intent(MainActivity.this, EndGameScreen.class);
+
+            // Add to the Intent
+            intent.putExtra("overallTurnCountEND", overallTurnCountEND);
+
+            intent.putExtra("player1NameEND", player1NameEND);
+            intent.putExtra("player1DeckEND", player1DeckEND);
+
+            // Start the new activity
+            startActivity(intent);
+
+        });
+
         // Start PlayerInputActivity to get player names
         Intent intent = new Intent(MainActivity.this, PlayerInputActivity.class);
         startActivityForResult(intent, PLAYER_INPUT_REQUEST);
 
-        // Initial highlight setup
-        // highlightActivePlayer();
-        // updateOverallTurnCountDisplay();
     }
 
     @Override
@@ -255,7 +442,7 @@ public class MainActivity extends AppCompatActivity {
                 case 3: playerTimeView = player4Time; break;
             }
             if (playerTimeView != null) {
-                playerTimeView.setText(String.format("Time %d: %d:%02d", i + 1, minutes, seconds));
+                playerTimeView.setText(String.format("Time: %d:%02d", minutes, seconds));
             }
         }
     }

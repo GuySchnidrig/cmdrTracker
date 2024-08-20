@@ -51,10 +51,10 @@ public class PlayerInputActivity extends AppCompatActivity {
         storePlayerNamesInArrays();
         storeDeckNamesInArrays();
 
-        startList.add("0"); // top left
-        startList.add("1"); // top right
-        startList.add("2"); // bottom left
-        startList.add("3"); // bottom right
+        startList.add("Top left starts");
+        startList.add("Bottom left starts");
+        startList.add("Bottom left starts");
+        startList.add("Top right starts");
 
         // Placeholder item
         namesList.add(0, "Select a player");

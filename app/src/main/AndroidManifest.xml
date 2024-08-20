@@ -43,6 +43,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".EndGameScreen"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.CmdrTracker">
+        </activity>
+
     </application>
 
 </manifest>

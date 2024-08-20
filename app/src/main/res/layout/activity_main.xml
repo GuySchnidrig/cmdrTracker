@@ -65,11 +65,10 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/player1Plus"
+                    android:id="@+id/player1Minus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textColor="#f1e6b2"
+                    android:text="-"
                     android:textSize="18sp" />
 
                 <TextView
@@ -84,11 +83,10 @@
                     android:textSize="60sp" />
 
                 <Button
-                    android:id="@+id/player1Minus"
+                    android:id="@+id/player1Plus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textColor="#f1e6b2"
+                    android:text="+"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -162,11 +160,10 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/player2Plus"
+                    android:id="@+id/player2Minus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textColor="#f1e6b2"
+                    android:text="-"
                     android:textSize="18sp" />
 
                 <TextView
@@ -181,11 +178,10 @@
                     android:textSize="60sp" />
 
                 <Button
-                    android:id="@+id/player2Minus"
+                    android:id="@+id/player2Plus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textColor="#f1e6b2"
+                    android:text="+"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -257,11 +253,10 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/player3Plus"
+                    android:id="@+id/player3Minus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textColor="#f1e6b2"
+                    android:text="-"
                     android:textSize="18sp" />
 
                 <TextView
@@ -276,11 +271,10 @@
                     android:textSize="60sp" />
 
                 <Button
-                    android:id="@+id/player3Minus"
+                    android:id="@+id/player3Plus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textColor="#f1e6b2"
+                    android:text="+"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -352,11 +346,10 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/player4Plus"
+                    android:id="@+id/player4Minus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textColor="#f1e6b2"
+                    android:text="-"
                     android:textSize="18sp" />
 
                 <TextView
@@ -371,11 +364,10 @@
                     android:textSize="60sp" />
 
                 <Button
-                    android:id="@+id/player4Minus"
+                    android:id="@+id/player4Plus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textColor="#f1e6b2"
+                    android:text="+"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -423,14 +415,30 @@
         android:id="@+id/passTurnButton"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_margin="12dp"
         android:text="Pass Turn"
-        android:textColor="#f1e6b2"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.5"
+        android:elevation="0dp"
+        />
+
+    <Button
+        android:id="@+id/endGameButton"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:textSize="8sp"
+        android:text="End"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98"
+        android:elevation="0dp"
+        android:backgroundTint="@color/main_grey"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
