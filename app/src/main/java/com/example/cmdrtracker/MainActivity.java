@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -259,30 +260,25 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize the "Pass Turn" button
         Button passTurnButton = findViewById(R.id.passTurnButton);
-
         passTurnButton.setOnClickListener(v -> passTurn());
 
-        Button menuButton = findViewById(R.id.endGameButton);
-        menuButton.setOnClickListener(v -> {
-
-            // Get the text from the TextView
-            int overallTurnCountEND = overallTurnCount;
-            String player1NameEND = player1Name.getText().toString();
-            String player1DeckEND = player1Deck.getText().toString();
-
-            // Create an Intent to start the new activity
-            Intent intent = new Intent(MainActivity.this, EndGameScreen.class);
-
-            // Add to the Intent
-            intent.putExtra("overallTurnCountEND", overallTurnCountEND);
-
-            intent.putExtra("player1NameEND", player1NameEND);
-            intent.putExtra("player1DeckEND", player1DeckEND);
-
-            // Start the new activity
-            startActivity(intent);
-
+        Button endGameButton = findViewById(R.id.endGameButton);
+        endGameButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Confirm End Game")
+                    .setMessage("Are you sure you want to end the game?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // User confirmed, proceed with ending the game
+                        endGame();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // User cancelled the dialog, just dismiss it
+                        dialog.dismiss();
+                    })
+                    .create()
+                    .show();
         });
+
 
         // Start PlayerInputActivity to get player names
         Intent intent = new Intent(MainActivity.this, PlayerInputActivity.class);
@@ -445,5 +441,23 @@ public class MainActivity extends AppCompatActivity {
                 playerTimeView.setText(String.format("Time: %d:%02d", minutes, seconds));
             }
         }
+    }
+
+    private void endGame() {
+        // Get the text from the TextView
+        int overallTurnCountEND = overallTurnCount;
+        String player1NameEND = player1Name.getText().toString();
+        String player1DeckEND = player1Deck.getText().toString();
+
+        // Create an Intent to start the new activity
+        Intent intent = new Intent(MainActivity.this, EndGameScreen.class);
+
+        // Add data to the Intent
+        intent.putExtra("overallTurnCountEND", overallTurnCountEND);
+        intent.putExtra("player1NameEND", player1NameEND);
+        intent.putExtra("player1DeckEND", player1DeckEND);
+
+        // Start the new activity
+        startActivity(intent);
     }
 }
