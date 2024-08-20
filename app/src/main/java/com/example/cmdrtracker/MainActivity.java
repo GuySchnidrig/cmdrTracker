@@ -17,12 +17,13 @@ public class MainActivity extends AppCompatActivity {
     TextView player1Deck, player2Deck, player3Deck, player4Deck;
     TextView overallTurnCountTextView; // Add TextView for overall turn count
 
-
     private static final int PLAYER_INPUT_REQUEST = 1;
     private final int[] turnOrder = {0, 2, 3, 1}; // Define the custom order
     private int currentTurnIndex = 0; // Index to track current turn in turnOrder array
-    private int currentPlayerIndex = turnOrder[currentTurnIndex]; // Initialize with the first player in order
+    private int currentPlayerIndex;
+    private int startingPositionIndex;
     private int overallTurnCount = 1; // Variable to track overall turn count
+    private int TurnCountStartingIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         player2Deck = findViewById(R.id.player2Deck);
         player3Deck = findViewById(R.id.player3Deck);
         player4Deck = findViewById(R.id.player4Deck);
+
 
         // Initialize Turn Count TextView
         overallTurnCountTextView = findViewById(R.id.overallTurnCountTextView);
@@ -83,19 +85,22 @@ public class MainActivity extends AppCompatActivity {
 
         passTurnButton.setOnClickListener(v -> passTurn());
 
+
         // Start PlayerInputActivity to get player names
         Intent intent = new Intent(MainActivity.this, PlayerInputActivity.class);
         startActivityForResult(intent, PLAYER_INPUT_REQUEST);
 
+
         // Initial highlight setup
-        highlightActivePlayer();
-        updateOverallTurnCountDisplay();
+        // highlightActivePlayer();
+        // updateOverallTurnCountDisplay();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PLAYER_INPUT_REQUEST && resultCode == RESULT_OK && data != null) {
+
             // Get player names from the intent and set them to the TextViews
             player1Name.setText(data.getStringExtra("player1Name"));
             player2Name.setText(data.getStringExtra("player2Name"));
@@ -106,6 +111,27 @@ public class MainActivity extends AppCompatActivity {
             player2Deck.setText(data.getStringExtra("player2Deck"));
             player3Deck.setText(data.getStringExtra("player3Deck"));
             player4Deck.setText(data.getStringExtra("player4Deck"));
+
+            // Retrieve startingPositionIndex from the Intent data
+            startingPositionIndex = data.getIntExtra("startingPositionIndex", 0);
+            currentPlayerIndex = startingPositionIndex;
+
+            // Initialize currentTurnIndex based on startingPositionIndex
+            if (startingPositionIndex >= 0 && startingPositionIndex < turnOrder.length) {
+                // Set currentTurnIndex to the startingPositionIndex directly
+                currentTurnIndex = startingPositionIndex;
+                // Set the currentPlayerIndex based on the turnOrder
+                currentPlayerIndex = turnOrder[currentTurnIndex];
+            } else {
+                // Handle unexpected values if needed
+                currentTurnIndex = -1; // Set to an invalid index or handle appropriately
+                // Handle invalid index for currentPlayerIndex if needed
+                currentPlayerIndex = -1;
+            }
+
+            highlightActivePlayer();
+            updateOverallTurnCountDisplay();
+
         }
     }
 
@@ -165,12 +191,12 @@ public class MainActivity extends AppCompatActivity {
         currentTurnIndex = (currentTurnIndex + 1) % turnOrder.length;
         currentPlayerIndex = turnOrder[currentTurnIndex];
 
+
         // If we have completed a full cycle, increment the overall turn count
-        if (currentTurnIndex == 0) {
+        if (currentTurnIndex == startingPositionIndex) {
             overallTurnCount++;
             updateOverallTurnCountDisplay(); // Update the display for overall turn count
         }
-
         highlightActivePlayer();
     }
 

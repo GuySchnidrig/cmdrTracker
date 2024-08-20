@@ -4,8 +4,8 @@
 
         <!-- Primary brand color. -->
         <item name="colorPrimary"> @color/main_grey</item>
-        <item name="colorPrimaryVariant">@color/main_grey</item>
-        <item name="colorOnPrimary">@color/main_grey</item>
+        <item name="colorPrimaryVariant">@color/secondary_yellow</item>
+        <item name="colorOnPrimary">@color/secondary_yellow</item>
 
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/secondary_yellow</item>
@@ -15,6 +15,16 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorOnPrimary</item>
 
+        <!-- Fullscreen options -->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
+        <!-- Button color customization -->
+        <item name="colorButtonNormal">@color/main_black</item>
+        <item name="colorAccent">@android:color/white</item>
+        <item name="colorControlHighlight">@color/secondary_yellow</item>
+        <item name="android:textColor">@color/main_black</item>
 
     </style>
 

@@ -17,9 +17,10 @@ public class PlayerInputActivity extends AppCompatActivity {
 
     Spinner player1Spinner, player2Spinner, player3Spinner, player4Spinner;
     Spinner player1SpinnerDeck, player2SpinnerDeck, player3SpinnerDeck, player4SpinnerDeck;
+    Spinner startingPlayerSpinner;
 
     DatabaseHelper myDB;
-    ArrayList<String> namesList, deckList;
+    ArrayList<String> namesList, deckList, startList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +40,25 @@ public class PlayerInputActivity extends AppCompatActivity {
         player3SpinnerDeck = findViewById(R.id.player3SpinnerDeck);
         player4SpinnerDeck = findViewById(R.id.player4SpinnerDeck);
 
+        startingPlayerSpinner = findViewById(R.id.startingPlayerSpinner);
+
         // Read names from the text file
 
         namesList = new ArrayList<>();
         deckList = new ArrayList<>();
+        startList = new ArrayList<>();
+
         storePlayerNamesInArrays();
         storeDeckNamesInArrays();
+
+        startList.add("0"); // top left
+        startList.add("1"); // top right
+        startList.add("2"); // bottom left
+        startList.add("3"); // bottom right
+
+        // Placeholder item
+        namesList.add(0, "Select a player");
+        deckList.add(0, "Select a deck");
 
         // Create an ArrayAdapter using the namesList and a default spinner layout
         ArrayAdapter<String> namesAdapter = new ArrayAdapter<>(this,
@@ -53,6 +67,10 @@ public class PlayerInputActivity extends AppCompatActivity {
 
         ArrayAdapter<String> deckAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, deckList);
+        deckAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayAdapter<String> startAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, startList);
         deckAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Apply the adapter to the spinners
@@ -65,6 +83,8 @@ public class PlayerInputActivity extends AppCompatActivity {
         player2SpinnerDeck.setAdapter(deckAdapter);
         player3SpinnerDeck.setAdapter(deckAdapter);
         player4SpinnerDeck.setAdapter(deckAdapter);
+
+        startingPlayerSpinner.setAdapter(startAdapter);
 
         // Handle submit button click
         Button submitButton = findViewById(R.id.submitBtn);
@@ -82,6 +102,9 @@ public class PlayerInputActivity extends AppCompatActivity {
                 String player3Deck = player3SpinnerDeck.getSelectedItem().toString();
                 String player4Deck = player4SpinnerDeck.getSelectedItem().toString();
 
+                String startingPlayer = startingPlayerSpinner.getSelectedItem().toString();
+                int startingPositionIndex = startList.indexOf(startingPlayer);
+
                 // Create intent to send data back to MainActivity
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("player1Name", player1Name);
@@ -93,6 +116,8 @@ public class PlayerInputActivity extends AppCompatActivity {
                 resultIntent.putExtra("player2Deck", player2Deck);
                 resultIntent.putExtra("player3Deck", player3Deck);
                 resultIntent.putExtra("player4Deck", player4Deck);
+
+                resultIntent.putExtra("startingPositionIndex", startingPositionIndex);
 
                 setResult(RESULT_OK, resultIntent);
                 finish();  // End the activity and send the result back

@@ -27,7 +27,7 @@
             android:name=".PlayerInputActivity"
             android:exported="true"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.CmdrTracker.FullScreen">
+            android:theme="@style/Theme.CmdrTracker">
         </activity>
 
         <!-- Main Activity Declaration -->
@@ -35,7 +35,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.CmdrTracker.FullScreen">
+            android:theme="@style/Theme.CmdrTracker">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
