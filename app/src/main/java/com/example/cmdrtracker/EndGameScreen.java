@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class EndGameScreen extends AppCompatActivity {
 
     DatabaseHelper myDB;
+    public int player1win, player2win, player3win, player4win;
+    public int player1start, player2start, player3start, player4start;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -48,6 +50,18 @@ public class EndGameScreen extends AppCompatActivity {
         int player4Life = intent.getIntExtra("player4LifeEND", 0);
         float player4Time = intent.getFloatExtra("player4TimeEND", 0.00f);
 
+        // Check if each player is the winning player and update their score
+        player1win = (player1Name != null && player1Name.equals(winningPlayer)) ? 1 : 0;
+        player2win = (player2Name != null && player2Name.equals(winningPlayer)) ? 1 : 0;
+        player3win = (player3Name != null && player3Name.equals(winningPlayer)) ? 1 : 0;
+        player4win = (player4Name != null && player4Name.equals(winningPlayer)) ? 1 : 0;
+
+        // Check if each player is the starting player and update their score
+        player1start = (player1Name != null && player1Name.equals(StartingPlayerName)) ? 1 : 0;
+        player2start = (player2Name != null && player2Name.equals(StartingPlayerName)) ? 1 : 0;
+        player3start = (player3Name != null && player3Name.equals(StartingPlayerName)) ? 1 : 0;
+        player4start = (player4Name != null && player4Name.equals(StartingPlayerName)) ? 1 : 0;
+
         // Use the player name as needed
         // For example, display it in a TextView
         ((TextView) findViewById(R.id.TurnCount)).setText(String.valueOf(overallTurnCount));
@@ -55,26 +69,34 @@ public class EndGameScreen extends AppCompatActivity {
         ((TextView) findViewById(R.id.winningPlayer)).setText(winningPlayer);
         ((TextView) findViewById(R.id.MostValuableCard)).setText(MVCard);
 
+
         ((TextView) findViewById(R.id.NamePlayer1)).setText(player1Name);
         ((TextView) findViewById(R.id.DeckPlayer1)).setText(player1Deck);
         ((TextView) findViewById(R.id.LifePlayer1)).setText(String.valueOf(player1Life));
         ((TextView) findViewById(R.id.TimePlayer1)).setText(String.format("%.2f", player1Time));
+        ((TextView) findViewById(R.id.Win1)).setText(String.valueOf(player1win));
+        ((TextView) findViewById(R.id.Start1)).setText(String.valueOf(player1start));
 
         ((TextView) findViewById(R.id.NamePlayer2)).setText(player2Name);
         ((TextView) findViewById(R.id.DeckPlayer2)).setText(player2Deck);
         ((TextView) findViewById(R.id.LifePlayer2)).setText(String.valueOf(player2Life));
         ((TextView) findViewById(R.id.TimePlayer2)).setText(String.format("%.2f", player2Time));
+        ((TextView) findViewById(R.id.Win2)).setText(String.valueOf(player2win));
+        ((TextView) findViewById(R.id.Start2)).setText(String.valueOf(player2start));
 
         ((TextView) findViewById(R.id.NamePlayer3)).setText(player3Name);
         ((TextView) findViewById(R.id.DeckPlayer3)).setText(player3Deck);
         ((TextView) findViewById(R.id.LifePlayer3)).setText(String.valueOf(player3Life));
         ((TextView) findViewById(R.id.TimePlayer3)).setText(String.format("%.2f", player3Time));
+        ((TextView) findViewById(R.id.Win3)).setText(String.valueOf(player3win));
+        ((TextView) findViewById(R.id.Start3)).setText(String.valueOf(player3start));
 
         ((TextView) findViewById(R.id.NamePlayer4)).setText(player4Name);
         ((TextView) findViewById(R.id.DeckPlayer4)).setText(player4Deck);
         ((TextView) findViewById(R.id.LifePlayer4)).setText(String.valueOf(player4Life));
         ((TextView) findViewById(R.id.TimePlayer4)).setText(String.format("%.2f", player4Time));
-
+        ((TextView) findViewById(R.id.Win4)).setText(String.valueOf(player4win));
+        ((TextView) findViewById(R.id.Start4)).setText(String.valueOf(player4start));
 
     }
 }
