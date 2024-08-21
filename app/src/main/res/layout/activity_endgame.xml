@@ -24,7 +24,7 @@
         android:id="@+id/TurnCountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TurnCount: "
+        android:text="Turn Count: "
         android:layout_row="0"
         android:layout_columnSpan="2"
         android:textColor="#f1e6b2"
@@ -59,9 +59,67 @@
         android:layout_row="1"
         android:layout_columnSpan="2"
         android:textColor="#f1e6b2"
+        android:textSize="12sp"/>
+
+    <!-- Winning Player -->
+    <TextView
+        android:id="@+id/winningPlayerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Winning Player: "
+        android:layout_row="0"
+        android:layout_columnSpan="2"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/winningPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="winningPlayer"
+        android:layout_row="0"
+        android:layout_columnSpan="2"
+        android:textColor="#f1e6b2"
         android:textSize="12sp"
         android:layout_marginBottom="16dp"/>
 
+
+    <!-- Legend -->
+    <TextView
+        android:id="@+id/NameLegend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/DeckLegend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deck"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+    <TextView
+        android:id="@+id/LifeLegend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Life"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+
+    <TextView
+        android:id="@+id/TimeLegend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
     <!-- Player 1 -->
     <TextView
         android:id="@+id/NamePlayer1"

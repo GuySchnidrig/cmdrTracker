@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
     TextView player1Deck, player2Deck, player3Deck, player4Deck;
     TextView player1Time, player2Time, player3Time, player4Time;
     TextView overallTurnCountTextView; // Add TextView for overall turn count
-    TextView StartingPlayerName, errorTextView;
+    TextView StartingPlayerName, errorTextView ;
+
+    private String winningPlayer;
 
     private static final int PLAYER_INPUT_REQUEST = 1;
     private final int[] turnOrder = {0, 2, 3, 1}; // Define the custom order
@@ -265,12 +267,12 @@ public class MainActivity extends AppCompatActivity {
 
         Button endGameButton = findViewById(R.id.endGameButton);
         endGameButton.setOnClickListener(v -> {
-            new AlertDialog.Builder(MainActivity.this)
+            new AlertDialog.Builder(MainActivity.this, R.style.CustomAlertDialogTheme)
                     .setTitle("Confirm End Game")
                     .setMessage("Are you sure you want to end the game?")
                     .setPositiveButton("Yes", (dialog, which) -> {
                         // User confirmed, proceed with ending the game
-                        endGame();
+                        showWinningPlayerDialog();
                     })
                     .setNegativeButton("No", (dialog, which) -> {
                         // User cancelled the dialog, just dismiss it
@@ -456,10 +458,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showWinningPlayerDialog() {
+        // Retrieve player names from TextViews
+        String[] players = {
+                player1Name.getText().toString(),
+                player2Name.getText().toString(),
+                player3Name.getText().toString(),
+                player4Name.getText().toString()
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.CustomAlertDialogTheme);
+        builder.setTitle("Select Winning Player");
+
+        builder.setItems(players, (dialog, which) -> {
+            // Handle player selection
+            winningPlayer = players[which]; // Directly assign the selected player to the winningPlayer variable
+            endGame(); // Call endGame() after setting the winning player
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
+            dialog.dismiss(); // Close the dialog if the user cancels
+        });
+
+        builder.create().show(); // Create and show the dialog
+    }
+
     private void endGame() {
         // Get the text from the TextView
         int overallTurnCountEND = overallTurnCount;
         String StartingPlayerNameEND = StartingPlayerName.getText().toString();
+        String winningPlayerEND = winningPlayer;
 
         String player1NameEND = player1Name.getText().toString();
         String player1DeckEND = player1Deck.getText().toString();
@@ -487,6 +515,7 @@ public class MainActivity extends AppCompatActivity {
         // Add data to the Intent
         intent.putExtra("overallTurnCountEND", overallTurnCountEND);
         intent.putExtra("StartingPlayerNameEND", StartingPlayerNameEND);
+        intent.putExtra("winningPlayerEND", winningPlayerEND);
 
         intent.putExtra("player1NameEND", player1NameEND);
         intent.putExtra("player1DeckEND", player1DeckEND);

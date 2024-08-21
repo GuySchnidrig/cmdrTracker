@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Custom style for AlertDialog -->
+    <style name="CustomAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <!-- Customize background and other properties -->
+        <item name="colorPrimary">@color/main_white</item>
+        <item name="colorPrimaryVariant">@color/main_white</item>
+        <item name="colorOnPrimary">@color/secondary_yellow</item>
+
+        <!-- Button color customization -->
+        <item name="colorButtonNormal">@color/secondary_yellow</item>
+        <item name="colorControlHighlight">@color/secondary_yellow</item>
+        <item name="android:textColor">@color/secondary_yellow</item>
+
+        <item name="android:background">@color/main_black</item> <!-- Background color -->
+        <item name="android:textColorPrimary">@color/main_white</item> <!-- Primary text color -->
+        <item name="android:textColorSecondary">@color/main_white</item> <!-- Secondary text color -->
+        <item name="android:textColorTertiary">@color/main_white</item>
+        <item name="colorAccent">@color/main_white</item> <!-- Accent color for buttons -->
+
+        <!-- Customize button appearance -->
+        <item name="android:buttonBarButtonStyle">@style/CustomAlertDialogButton</item>
+    </style>
+
+    <!-- Custom button style -->
+    <style name="CustomAlertDialogButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/secondary_yellow</item> <!-- Button text color -->
+    </style>
+</resources>

@@ -16,6 +16,7 @@ public class EndGameScreen extends AppCompatActivity {
         Intent intent = getIntent();
         int overallTurnCount = intent.getIntExtra("overallTurnCountEND", 0);
         String StartingPlayerName = intent.getStringExtra("StartingPlayerNameEND");
+        String winningPlayer = intent.getStringExtra("winningPlayerEND");
 
         String player1Name = intent.getStringExtra("player1NameEND");
         String player1Deck = intent.getStringExtra("player1DeckEND");
@@ -43,6 +44,7 @@ public class EndGameScreen extends AppCompatActivity {
         // For example, display it in a TextView
         ((TextView) findViewById(R.id.TurnCount)).setText(String.valueOf(overallTurnCount));
         ((TextView) findViewById(R.id.StartingPlayer)).setText(StartingPlayerName);
+        ((TextView) findViewById(R.id.winningPlayer)).setText(winningPlayer);
 
         ((TextView) findViewById(R.id.NamePlayer1)).setText(player1Name);
         ((TextView) findViewById(R.id.DeckPlayer1)).setText(player1Deck);

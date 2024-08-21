@@ -3,7 +3,6 @@ package com.example.cmdrtracker;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -88,40 +87,37 @@ public class PlayerInputActivity extends AppCompatActivity {
 
         // Handle submit button click
         Button submitButton = findViewById(R.id.submitBtn);
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Get selected player names
-                String player1Name = player1Spinner.getSelectedItem().toString();
-                String player2Name = player2Spinner.getSelectedItem().toString();
-                String player3Name = player3Spinner.getSelectedItem().toString();
-                String player4Name = player4Spinner.getSelectedItem().toString();
+        submitButton.setOnClickListener(v -> {
+            // Get selected player names
+            String player1Name = player1Spinner.getSelectedItem().toString();
+            String player2Name = player2Spinner.getSelectedItem().toString();
+            String player3Name = player3Spinner.getSelectedItem().toString();
+            String player4Name = player4Spinner.getSelectedItem().toString();
 
-                String player1Deck = player1SpinnerDeck.getSelectedItem().toString();
-                String player2Deck = player2SpinnerDeck.getSelectedItem().toString();
-                String player3Deck = player3SpinnerDeck.getSelectedItem().toString();
-                String player4Deck = player4SpinnerDeck.getSelectedItem().toString();
+            String player1Deck = player1SpinnerDeck.getSelectedItem().toString();
+            String player2Deck = player2SpinnerDeck.getSelectedItem().toString();
+            String player3Deck = player3SpinnerDeck.getSelectedItem().toString();
+            String player4Deck = player4SpinnerDeck.getSelectedItem().toString();
 
-                String startingPlayer = startingPlayerSpinner.getSelectedItem().toString();
-                int startingPositionIndex = startList.indexOf(startingPlayer);
+            String startingPlayer = startingPlayerSpinner.getSelectedItem().toString();
+            int startingPositionIndex = startList.indexOf(startingPlayer);
 
-                // Create intent to send data back to MainActivity
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("player1Name", player1Name);
-                resultIntent.putExtra("player2Name", player2Name);
-                resultIntent.putExtra("player3Name", player3Name);
-                resultIntent.putExtra("player4Name", player4Name);
+            // Create intent to send data back to MainActivity
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("player1Name", player1Name);
+            resultIntent.putExtra("player2Name", player2Name);
+            resultIntent.putExtra("player3Name", player3Name);
+            resultIntent.putExtra("player4Name", player4Name);
 
-                resultIntent.putExtra("player1Deck", player1Deck);
-                resultIntent.putExtra("player2Deck", player2Deck);
-                resultIntent.putExtra("player3Deck", player3Deck);
-                resultIntent.putExtra("player4Deck", player4Deck);
+            resultIntent.putExtra("player1Deck", player1Deck);
+            resultIntent.putExtra("player2Deck", player2Deck);
+            resultIntent.putExtra("player3Deck", player3Deck);
+            resultIntent.putExtra("player4Deck", player4Deck);
 
-                resultIntent.putExtra("startingPositionIndex", startingPositionIndex);
+            resultIntent.putExtra("startingPositionIndex", startingPositionIndex);
 
-                setResult(RESULT_OK, resultIntent);
-                finish();  // End the activity and send the result back
-            }
+            setResult(RESULT_OK, resultIntent);
+            finish();  // End the activity and send the result back
         });
     }
 

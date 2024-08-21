@@ -16,6 +16,7 @@
         <item name="android:statusBarColor">?attr/colorOnPrimary</item>
 
         <!-- Fullscreen options -->
+        <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -25,6 +26,9 @@
         <item name="colorAccent">@android:color/white</item>
         <item name="colorControlHighlight">@color/secondary_yellow</item>
         <item name="android:textColor">@color/main_black</item>
+
+        <!-- Alert -->
+        <item name="alertDialogTheme">@style/CustomAlertDialogTheme</item>
 
     </style>
 
