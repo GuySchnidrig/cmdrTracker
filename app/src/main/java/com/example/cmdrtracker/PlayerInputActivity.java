@@ -53,7 +53,7 @@ public class PlayerInputActivity extends AppCompatActivity {
 
         startList.add("Top left starts");
         startList.add("Bottom left starts");
-        startList.add("Bottom left starts");
+        startList.add("Bottom right starts");
         startList.add("Top right starts");
 
         // Placeholder item

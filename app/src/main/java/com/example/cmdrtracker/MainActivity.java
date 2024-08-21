@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     TextView player1Deck, player2Deck, player3Deck, player4Deck;
     TextView player1Time, player2Time, player3Time, player4Time;
     TextView overallTurnCountTextView; // Add TextView for overall turn count
+    TextView StartingPlayerName, errorTextView;
 
     private static final int PLAYER_INPUT_REQUEST = 1;
     private final int[] turnOrder = {0, 2, 3, 1}; // Define the custom order
@@ -304,7 +305,6 @@ public class MainActivity extends AppCompatActivity {
 
             // Retrieve startingPositionIndex from the Intent data
             startingPositionIndex = data.getIntExtra("startingPositionIndex", 0);
-            currentPlayerIndex = startingPositionIndex;
 
             // Initialize currentTurnIndex based on startingPositionIndex
             if (startingPositionIndex >= 0 && startingPositionIndex < turnOrder.length) {
@@ -317,6 +317,19 @@ public class MainActivity extends AppCompatActivity {
                 currentTurnIndex = -1; // Set to an invalid index or handle appropriately
                 // Handle invalid index for currentPlayerIndex if needed
                 currentPlayerIndex = -1;
+            }
+
+            // Determine player names based on startingPositionIndex
+            if (startingPositionIndex == 0) {
+                StartingPlayerName = player1Name;
+            } else if (startingPositionIndex == 1) {
+                StartingPlayerName = player3Name;
+            } else if (startingPositionIndex == 2) {
+                StartingPlayerName = player4Name;
+            } else if (startingPositionIndex == 3) {
+                StartingPlayerName = player2Name;
+            } else {
+                errorTextView.setText("Invalid starting position index!");
             }
 
             // Initialize totalTimes array to zero
@@ -446,16 +459,54 @@ public class MainActivity extends AppCompatActivity {
     private void endGame() {
         // Get the text from the TextView
         int overallTurnCountEND = overallTurnCount;
+        String StartingPlayerNameEND = StartingPlayerName.getText().toString();
+
         String player1NameEND = player1Name.getText().toString();
         String player1DeckEND = player1Deck.getText().toString();
+        String player1TimeEND = player1Time.getText().toString();
+        String player1LifeEND = player1Life.getText().toString();
+
+        String player2NameEND = player2Name.getText().toString();
+        String player2DeckEND = player2Deck.getText().toString();
+        String player2TimeEND = player2Time.getText().toString();
+        String player2LifeEND = player2Life.getText().toString();
+
+        String player3NameEND = player3Name.getText().toString();
+        String player3DeckEND = player3Deck.getText().toString();
+        String player3TimeEND = player3Time.getText().toString();
+        String player3LifeEND = player3Life.getText().toString();
+
+        String player4NameEND = player4Name.getText().toString();
+        String player4DeckEND = player4Deck.getText().toString();
+        String player4TimeEND = player4Time.getText().toString();
+        String player4LifeEND = player4Life.getText().toString();
 
         // Create an Intent to start the new activity
         Intent intent = new Intent(MainActivity.this, EndGameScreen.class);
 
         // Add data to the Intent
         intent.putExtra("overallTurnCountEND", overallTurnCountEND);
+        intent.putExtra("StartingPlayerNameEND", StartingPlayerNameEND);
+
         intent.putExtra("player1NameEND", player1NameEND);
         intent.putExtra("player1DeckEND", player1DeckEND);
+        intent.putExtra("player1TimeEND", player1TimeEND);
+        intent.putExtra("player1LifeEND", player1LifeEND);
+
+        intent.putExtra("player2NameEND", player2NameEND);
+        intent.putExtra("player2DeckEND", player2DeckEND);
+        intent.putExtra("player2TimeEND", player2TimeEND);
+        intent.putExtra("player2LifeEND", player2LifeEND);
+
+        intent.putExtra("player3NameEND", player3NameEND);
+        intent.putExtra("player3DeckEND", player3DeckEND);
+        intent.putExtra("player3TimeEND", player3TimeEND);
+        intent.putExtra("player3LifeEND", player3LifeEND);
+
+        intent.putExtra("player4NameEND", player4NameEND);
+        intent.putExtra("player4DeckEND", player4DeckEND);
+        intent.putExtra("player4TimeEND", player4TimeEND);
+        intent.putExtra("player4LifeEND", player4LifeEND);
 
         // Start the new activity
         startActivity(intent);

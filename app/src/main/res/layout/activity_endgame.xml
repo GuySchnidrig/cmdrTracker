@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:columnCount="8"
+    android:columnCount="4"
     android:rowCount="8"
     android:background="#68656A">
 
@@ -11,27 +11,60 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_columnSpan="8"
+        android:layout_columnSpan="4"
         android:layout_gravity="left"
         android:text="cmdr tracker"
         android:textSize="24sp"
         android:textColor="#f1e6b2"
         android:gravity="center"
-        android:layout_row="0"
         android:layout_marginBottom="16dp"/>
 
+    <!-- overallTurnCountEND -->
     <TextView
-        android:id="@+id/overallTurnCountEND"
+        android:id="@+id/TurnCountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Turn"
-        android:layout_row="1"
-        android:layout_columnSpan="8"
+        android:text="TurnCount: "
+        android:layout_row="0"
+        android:layout_columnSpan="2"
         android:textColor="#f1e6b2"
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/player1NameEND"
+        android:id="@+id/TurnCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TurnCount"
+        android:layout_row="0"
+        android:layout_columnSpan="2"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp" />
+
+    <!-- StartingPlayer -->
+    <TextView
+        android:id="@+id/StartingPlayerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Starting Player: "
+        android:layout_row="1"
+        android:layout_columnSpan="2"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/StartingPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="StartingPlayer"
+        android:layout_row="1"
+        android:layout_columnSpan="2"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Player 1 -->
+    <TextView
+        android:id="@+id/NamePlayer1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Player 1"
@@ -39,11 +72,142 @@
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/player1DeckEND"
+        android:id="@+id/DeckPlayer1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Deck 1"
         android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+    <TextView
+        android:id="@+id/LifePlayer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Life 1"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+
+    <TextView
+        android:id="@+id/TimePlayer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time 1"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+    <!-- Player 2-->
+    <TextView
+        android:id="@+id/NamePlayer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player 2"
+        android:textColor="#f1e6b2"
         android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/DeckPlayer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deck 2"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+    <TextView
+        android:id="@+id/LifePlayer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Life 2"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+
+    <TextView
+        android:id="@+id/TimePlayer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time 2"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+    <!-- Player 3 -->
+    <TextView
+        android:id="@+id/NamePlayer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player 3"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/DeckPlayer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deck 3"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+    <TextView
+        android:id="@+id/LifePlayer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Life 3"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+
+    <TextView
+        android:id="@+id/TimePlayer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time 3"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+    <!-- Player 4 -->
+    <TextView
+        android:id="@+id/NamePlayer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player 4"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/DeckPlayer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deck 4"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+    <TextView
+        android:id="@+id/LifePlayer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Life 4"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
+
+
+    <TextView
+        android:id="@+id/TimePlayer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time 4"
+        android:textColor="#f1e6b2"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"/>
 
 </GridLayout>
