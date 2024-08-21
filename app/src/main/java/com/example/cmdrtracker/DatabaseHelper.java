@@ -1,5 +1,6 @@
 package com.example.cmdrtracker;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -113,6 +114,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor = db.rawQuery(query, null);
         }
         return cursor;
+    }
+
+    public void addPlayer(String playerName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("player_name", playerName);
+        db.insert("player_names", null, values);
+    }
+
+    public void addDeck(String deckName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("deck_name", deckName);
+        db.insert("deck_names", null, values);
     }
 
 }

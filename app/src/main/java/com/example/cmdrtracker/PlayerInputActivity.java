@@ -5,9 +5,11 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -41,8 +43,11 @@ public class PlayerInputActivity extends AppCompatActivity {
 
         startingPlayerSpinner = findViewById(R.id.startingPlayerSpinner);
 
-        // Read names from the text file
+        // Initialize new UI elements
+        Button buttonAddPlayer = findViewById(R.id.submitNewPlayer);
+        Button buttonAddDeck = findViewById(R.id.submitNewDeck);
 
+        // Read names from the text file
         namesList = new ArrayList<>();
         deckList = new ArrayList<>();
         startList = new ArrayList<>();
@@ -84,6 +89,12 @@ public class PlayerInputActivity extends AppCompatActivity {
         player4SpinnerDeck.setAdapter(deckAdapter);
 
         startingPlayerSpinner.setAdapter(startAdapter);
+
+        // Handle add player button click
+        buttonAddPlayer.setOnClickListener(v -> showAddPlayerDialog());
+
+        // Handle add deck button click
+        buttonAddDeck.setOnClickListener(v -> showAddDeckDialog());
 
         // Handle submit button click
         Button submitButton = findViewById(R.id.submitBtn);
@@ -143,4 +154,63 @@ public class PlayerInputActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void showAddPlayerDialog() {
+        // Create an EditText view for user input
+        final EditText input = new EditText(this);
+        input.setHint("Enter player name");
+
+        new AlertDialog.Builder(this)
+                .setTitle("Add New Player")
+                .setView(input)
+                .setPositiveButton("Add", (dialog, which) -> {
+                    String playerName = input.getText().toString().trim();
+                    if (!playerName.isEmpty()) {
+                        myDB.addPlayer(playerName);
+                        namesList.add(playerName); // Update spinner list
+                        updateSpinners();
+                        Toast.makeText(this, "Player added", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Please enter a player name", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.cancel())
+                .show();
+    }
+
+    private void showAddDeckDialog() {
+        // Create an EditText view for user input
+        final EditText input = new EditText(this);
+        input.setHint("Enter deck name");
+
+        new AlertDialog.Builder(this)
+                .setTitle("Add New Deck")
+                .setView(input)
+                .setPositiveButton("Add", (dialog, which) -> {
+                    String deckName = input.getText().toString().trim();
+                    if (!deckName.isEmpty()) {
+                        myDB.addDeck(deckName);
+                        deckList.add(deckName); // Update spinner list
+                        updateSpinners();
+                        Toast.makeText(this, "Deck added", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Please enter a deck name", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.cancel())
+                .show();
+    }
+
+    private void updateSpinners() {
+        ((ArrayAdapter<String>) player1Spinner.getAdapter()).notifyDataSetChanged();
+        ((ArrayAdapter<String>) player2Spinner.getAdapter()).notifyDataSetChanged();
+        ((ArrayAdapter<String>) player3Spinner.getAdapter()).notifyDataSetChanged();
+        ((ArrayAdapter<String>) player4Spinner.getAdapter()).notifyDataSetChanged();
+
+        ((ArrayAdapter<String>) player1SpinnerDeck.getAdapter()).notifyDataSetChanged();
+        ((ArrayAdapter<String>) player2SpinnerDeck.getAdapter()).notifyDataSetChanged();
+        ((ArrayAdapter<String>) player3SpinnerDeck.getAdapter()).notifyDataSetChanged();
+        ((ArrayAdapter<String>) player4SpinnerDeck.getAdapter()).notifyDataSetChanged();
+    }
+
 }
