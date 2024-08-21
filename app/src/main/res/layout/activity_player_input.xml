@@ -97,6 +97,7 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/main_black"
         android:text="Start Game!" />
+
     <!-- Submit Player -->
     <Button
         android:id="@+id/submitNewPlayer"

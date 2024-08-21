@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PlayerInputActivity extends AppCompatActivity {
 
@@ -202,6 +203,10 @@ public class PlayerInputActivity extends AppCompatActivity {
     }
 
     private void updateSpinners() {
+        // Sort the lists before notifying the adapters
+        Collections.sort(namesList);
+        Collections.sort(deckList);
+
         ((ArrayAdapter<String>) player1Spinner.getAdapter()).notifyDataSetChanged();
         ((ArrayAdapter<String>) player2Spinner.getAdapter()).notifyDataSetChanged();
         ((ArrayAdapter<String>) player3Spinner.getAdapter()).notifyDataSetChanged();

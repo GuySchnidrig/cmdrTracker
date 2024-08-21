@@ -97,7 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Method to get all player names from the existing table
     Cursor readAlLPlayerNames() {
-        String query = "SELECT player_name FROM player_names";
+        String query = "SELECT player_name FROM player_names ORDER BY player_name ASC";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         if(db != null) {
@@ -107,7 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     // Method to get all deck names from the existing table
     Cursor readAlLDeckNames() {
-        String query = "SELECT deck_name FROM deck_names";
+        String query = "SELECT deck_name FROM deck_names ORDER BY deck_name ASC";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         if(db != null) {
@@ -130,4 +130,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert("deck_names", null, values);
     }
 
+    public int getMaxGameId() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT MAX(game_id) FROM games_data", null);
+
+        int maxGameId = 0;
+        if (cursor.moveToFirst()) {
+            maxGameId = cursor.getInt(0);
+        }
+
+        cursor.close();
+        return maxGameId;
+    }
+
+    public void addGameData(
+            int gameID,
+            String gameType,
+            String date,
+            String player_name,
+            String deck_name,
+            String start,
+            int win,
+            int win_turn,
+            String win_type,
+            String mv_card,
+            int life,
+            float time_total,
+            String deck_link,
+            String uploader) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("game_id", gameID);
+        values.put("game_type", gameType);
+        values.put("date", date);
+        values.put("player_name", player_name);
+        values.put("deck_name", deck_name);
+        values.put("start", start);
+        values.put("win", win);
+        values.put("win_turn", win_turn);
+        values.put("win_type", win_type);
+        values.put("mv_card", mv_card);
+        values.put("life", life);
+        values.put("time_total", time_total);
+        values.put("deck_link", deck_link);
+        values.put("uploader", uploader);
+
+        db.insert("game_data", null, values);
+    }
 }

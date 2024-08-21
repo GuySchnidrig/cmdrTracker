@@ -7,7 +7,9 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TextView StartingPlayerName, errorTextView ;
 
     private String winningPlayer;
+    private String MVCard;
 
     private static final int PLAYER_INPUT_REQUEST = 1;
     private final int[] turnOrder = {0, 2, 3, 1}; // Define the custom order
@@ -458,6 +461,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private float getTimeInMinutesFromTextView(TextView playerTimeView) {
+        String timeText = playerTimeView.getText().toString();
+
+        // Remove the "Time: " prefix if it's there
+        String timeOnly = timeText.replace("Time: ", "");
+
+        // Split the string by the colon to get minutes and seconds
+        String[] parts = timeOnly.split(":");
+
+        if (parts.length == 2) {
+            int minutes = Integer.parseInt(parts[0]);
+            int seconds = Integer.parseInt(parts[1]);
+
+            // Convert the time to total minutes as a float
+            return minutes + (seconds / 60.00f);
+        }
+
+        // If parsing fails or the format is unexpected, return 0.0f or handle the error appropriately
+        return 0.00f;
+    }
+
     private void showWinningPlayerDialog() {
         // Retrieve player names from TextViews
         String[] players = {
@@ -473,7 +497,39 @@ public class MainActivity extends AppCompatActivity {
         builder.setItems(players, (dialog, which) -> {
             // Handle player selection
             winningPlayer = players[which]; // Directly assign the selected player to the winningPlayer variable
-            endGame(); // Call endGame() after setting the winning player
+            showMVCardDialog(); // Call endGame() after setting the winning player
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
+            dialog.dismiss(); // Close the dialog if the user cancels
+        });
+
+        builder.create().show(); // Create and show the dialog
+    }
+
+    private void showMVCardDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.CustomAlertDialogTheme);
+        builder.setTitle("Select Most Valuable Card");
+
+        // Create an EditText to enter the most valuable card
+        EditText input = new EditText(MainActivity.this);
+        input.setHint("Enter Most Valuable Card");
+
+        // Set the EditText as the view for the dialog
+        builder.setView(input);
+
+        // Set up the positive button to handle the input
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            MVCard = input.getText().toString();
+            if (!MVCard.isEmpty()) {
+                // Handle the entered most valuable card
+                // For example, you can store the card in a variable or perform some logic with it
+                // Call endGame() after handling the input
+                endGame();
+            } else {
+                // Handle the case where the user didn't enter anything
+                Toast.makeText(MainActivity.this, "Please enter a card name", Toast.LENGTH_SHORT).show();
+            }
         });
 
         builder.setNegativeButton("Cancel", (dialog, which) -> {
@@ -488,26 +544,27 @@ public class MainActivity extends AppCompatActivity {
         int overallTurnCountEND = overallTurnCount;
         String StartingPlayerNameEND = StartingPlayerName.getText().toString();
         String winningPlayerEND = winningPlayer;
+        String MVCardEND = MVCard;
 
         String player1NameEND = player1Name.getText().toString();
         String player1DeckEND = player1Deck.getText().toString();
-        String player1TimeEND = player1Time.getText().toString();
-        String player1LifeEND = player1Life.getText().toString();
+        float  player1TimeEND = getTimeInMinutesFromTextView(player1Time);
+        int player1LifeEND = Integer.parseInt(player1Life.getText().toString());
 
         String player2NameEND = player2Name.getText().toString();
         String player2DeckEND = player2Deck.getText().toString();
-        String player2TimeEND = player2Time.getText().toString();
-        String player2LifeEND = player2Life.getText().toString();
+        float  player2TimeEND = getTimeInMinutesFromTextView(player2Time);
+        int player2LifeEND = Integer.parseInt(player2Life.getText().toString());
 
         String player3NameEND = player3Name.getText().toString();
         String player3DeckEND = player3Deck.getText().toString();
-        String player3TimeEND = player3Time.getText().toString();
-        String player3LifeEND = player3Life.getText().toString();
+        float  player3TimeEND = getTimeInMinutesFromTextView(player3Time);
+        int player3LifeEND = Integer.parseInt(player3Life.getText().toString());
 
         String player4NameEND = player4Name.getText().toString();
         String player4DeckEND = player4Deck.getText().toString();
-        String player4TimeEND = player4Time.getText().toString();
-        String player4LifeEND = player4Life.getText().toString();
+        float  player4TimeEND = getTimeInMinutesFromTextView(player4Time);
+        int player4LifeEND = Integer.parseInt(player4Life.getText().toString());
 
         // Create an Intent to start the new activity
         Intent intent = new Intent(MainActivity.this, EndGameScreen.class);
@@ -516,6 +573,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("overallTurnCountEND", overallTurnCountEND);
         intent.putExtra("StartingPlayerNameEND", StartingPlayerNameEND);
         intent.putExtra("winningPlayerEND", winningPlayerEND);
+        intent.putExtra("MVCardEND", MVCardEND);
 
         intent.putExtra("player1NameEND", player1NameEND);
         intent.putExtra("player1DeckEND", player1DeckEND);
