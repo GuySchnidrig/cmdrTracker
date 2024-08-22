@@ -1,11 +1,14 @@
 package com.example.cmdrtracker;
 
+import static java.lang.Float.parseFloat;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -17,16 +20,21 @@ import java.time.format.DateTimeFormatter;
 public class EndGameScreen extends AppCompatActivity {
 
     DatabaseHelper myDB;
+
     public int player1win, player2win, player3win, player4win;
     public int player1start, player2start, player3start, player4start;
+
     public int player1Life, player2Life, player3Life, player4Life;
-    public int player1Time, player2Time, player3Time, player4Time;
-    public int overallTurnCount;
 
+    public float player1Time, player2Time, player3Time, player4Time;
+    public int overallTurnCount, overallTurnCountT;
+    public int game_id;
 
+    public String player1Name, player2Name, player3Name, player4Name;
+    public String player1Deck, player2Deck, player3Deck, player4Deck;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    @SuppressLint("DefaultLocale")
+    @SuppressLint({"DefaultLocale"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,13 +103,18 @@ public class EndGameScreen extends AppCompatActivity {
                     .show();
         });
 
+        // Initialize the "Submit Game" button
+        Button shareDBButton = findViewById(R.id.SendDB);
+
+
         // Use the player name as needed
         // For example, display it in a TextView
+
         ((TextView) findViewById(R.id.TurnCount)).setText(String.valueOf(overallTurnCount));
         ((TextView) findViewById(R.id.StartingPlayer)).setText(StartingPlayerName);
         ((TextView) findViewById(R.id.winningPlayer)).setText(winningPlayer);
         ((TextView) findViewById(R.id.MostValuableCard)).setText(MVCard);
-
+        ((TextView) findViewById(R.id.GameIdentity)).setText(String.valueOf(game_id));
 
         ((TextView) findViewById(R.id.NamePlayer1)).setText(player1Name);
         ((TextView) findViewById(R.id.DeckPlayer1)).setText(player1Deck);
@@ -131,7 +144,10 @@ public class EndGameScreen extends AppCompatActivity {
         ((TextView) findViewById(R.id.Win4)).setText(String.valueOf(player4win));
         ((TextView) findViewById(R.id.Start4)).setText(String.valueOf(player4start));
 
+
     }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void addGameDataEntries() {
@@ -140,34 +156,70 @@ public class EndGameScreen extends AppCompatActivity {
         LocalDate today = LocalDate.now();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String date = today.format(dateFormatter);
-
-        String start = ((TextView) findViewById(R.id.StartingPlayer)).getText().toString();
         String winType = "DefaultWinType"; // Example value
         String deckLink = ""; // Example URL or other data source
         String uploader = "Guy";
-        int gameID = myDB.getMaxGameId() + 1;
         String mvCard = ((TextView) findViewById(R.id.MostValuableCard)).getText().toString();
+
+        // Extract the overallTurnCount from TextView to ensure consistency
+        String overallTurnCountString = ((TextView) findViewById(R.id.TurnCount)).getText().toString();
+        int overallTurnCount = Integer.parseInt(overallTurnCountString);
 
         // Player 1
         String player1Name = ((TextView) findViewById(R.id.NamePlayer1)).getText().toString();
         String player1Deck = ((TextView) findViewById(R.id.DeckPlayer1)).getText().toString();
 
+        String LifePlayer1String = ((TextView) findViewById(R.id.LifePlayer1)).getText().toString();
+        int player1Life = Integer.parseInt(LifePlayer1String);
+
+        String player1TimeString = ((TextView) findViewById(R.id.TimePlayer1)).getText().toString();
+        float player1Time = parseFloat(player1TimeString);
+
         // Player 2
         String player2Name = ((TextView) findViewById(R.id.NamePlayer2)).getText().toString();
         String player2Deck = ((TextView) findViewById(R.id.DeckPlayer2)).getText().toString();
+
+        String LifePlayer2String = ((TextView) findViewById(R.id.LifePlayer2)).getText().toString();
+        int player2Life = Integer.parseInt(LifePlayer2String);
+
+        String player2TimeString = ((TextView) findViewById(R.id.TimePlayer2)).getText().toString();
+        float player2Time = parseFloat(player2TimeString);
+
 
         // Player 3
         String player3Name = ((TextView) findViewById(R.id.NamePlayer3)).getText().toString();
         String player3Deck = ((TextView) findViewById(R.id.DeckPlayer3)).getText().toString();
 
+        String LifePlayer3String = ((TextView) findViewById(R.id.LifePlayer3)).getText().toString();
+        int player3Life = Integer.parseInt(LifePlayer3String);
+
+        String player3TimeString = ((TextView) findViewById(R.id.TimePlayer3)).getText().toString();
+        float player3Time = parseFloat(player3TimeString);
+
         // Player 4
         String player4Name = ((TextView) findViewById(R.id.NamePlayer4)).getText().toString();
         String player4Deck = ((TextView) findViewById(R.id.DeckPlayer4)).getText().toString();
 
-        // Add data to the database
-        myDB.addGameData(gameID,gameType, date,player1Name,player1Deck,start,player1win,overallTurnCount,winType,mvCard,player1Life,player1Time,deckLink,uploader);
-        //myDB.addGameData(gameID,gameType, date,player2Name,player2Deck,start,player2win,overallTurnCount,winType,mvCard,player2Life,player2Time,deckLink,uploader);
-        //myDB.addGameData(gameID,gameType, date,player3Name,player3Deck,start,player3win,overallTurnCount,winType,mvCard,player3Life,player3Time,deckLink,uploader);
-        //myDB.addGameData(gameID,gameType, date,player4Name,player4Deck,start,player4win,overallTurnCount,winType,mvCard,player4Life,player4Time,deckLink,uploader);
+        String LifePlayer4String = ((TextView) findViewById(R.id.LifePlayer4)).getText().toString();
+        int player4Life = Integer.parseInt(LifePlayer4String);
+
+        String player4TimeString = ((TextView) findViewById(R.id.TimePlayer4)).getText().toString();
+        float player4Time = parseFloat(player4TimeString);
+
+
+        // Add Game Data
+        myDB.addGameData(game_id,gameType, date,player1Name,player1Deck,player1start,player1win,overallTurnCount,winType,mvCard,player1Life,player1Time,deckLink,uploader);
+        myDB.addGameData(game_id,gameType, date,player2Name,player2Deck,player2start,player2win,overallTurnCount,winType,mvCard,player2Life,player2Time,deckLink,uploader);
+        myDB.addGameData(game_id,gameType, date,player3Name,player3Deck,player3start,player3win,overallTurnCount,winType,mvCard,player3Life,player3Time,deckLink,uploader);
+        myDB.addGameData(game_id,gameType, date,player4Name,player4Deck,player4start,player4win,overallTurnCount,winType,mvCard,player4Life,player4Time,deckLink,uploader);
+
+        // Optionally, you could show a message or take other actions after adding the game data
+        Toast.makeText(this, "Game data submitted!", Toast.LENGTH_SHORT).show();
+
+        // Start PlayerInputActivity
+        Intent intent = new Intent(this, PlayerInputActivity.class);
+        startActivity(intent);
     }
+
+
 }

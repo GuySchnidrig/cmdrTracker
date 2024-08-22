@@ -51,6 +51,7 @@
             android:theme="@style/Theme.CmdrTracker">
         </activity>
 
+
     </application>
 
 </manifest>

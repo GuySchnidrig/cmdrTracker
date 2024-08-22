@@ -130,40 +130,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert("deck_names", null, values);
     }
 
-    public int getMaxGameId() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT MAX(game_id) FROM games_data", null);
+public long addGameData(int game_ID,
+                       String gameType,
+                       String date,
+                       String playerName,
+                       String deckName,
+                       int start,
+                       int win,
+                       int winTurn,
+                       String winType,
+                       String mvCard,
+                       int life,
+                       float timeTotal,
+                       String deckLink,
+                       String uploader) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long gameID = -1;
 
-        int maxGameId = 0;
-        if (cursor.moveToFirst()) {
-            maxGameId = cursor.getInt(0);
-        }
-
-        cursor.close();
-        return maxGameId;
-    }
-
-    public void addGameData(
-            int gameID,
-            String gameType,
-            String date,
-            String playerName,
-            String deckName,
-            String start,
-            int win,
-            int winTurn,
-            String winType,
-            String mvCard,
-            int life,
-            float timeTotal,
-            String deckLink,
-            String uploader) {
-
-        SQLiteDatabase db = null;
         try {
-            db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("game_id", gameID);
+            values.put("game_id", game_ID);
             values.put("game_type", gameType);
             values.put("date", date);
             values.put("player_name", playerName);
@@ -179,17 +165,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("uploader", uploader);
 
             db.beginTransaction();
-            db.insert("game_data", null, values);
-            db.setTransactionSuccessful();
-        } catch (Exception e) {
-            // Handle the exception, e.g., log it
-            e.printStackTrace();
-        } finally {
-            if (db != null && db.isOpen()) {
-                db.endTransaction();
-                db.close();
+            gameID = db.insert("game_data", null, values);
+            if (gameID != -1) {
+                db.setTransactionSuccessful();
             }
+        } catch (Exception e) {
+            // Log or handle the exception as needed
+        } finally {
+            db.endTransaction();
         }
+
+        return gameID;
     }
+
 
 }

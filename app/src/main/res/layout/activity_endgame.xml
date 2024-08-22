@@ -23,17 +23,38 @@
         android:layout_width="match_parent"
         android:layout_height="27dp"
         android:background="#68656A"
-        android:layout_weight="0.3"
+        android:layout_weight="0.5"
 
         android:columnCount="4"
-        android:rowCount="4">
+        android:rowCount="5">
+
+        <!-- Game ID -->
+        <TextView
+            android:id="@+id/GameIDText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:text="Game ID: "
+            android:textColor="@color/main_black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/GameIdentity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:text="GameID"
+            android:textColor="#f1e6b2"
+            android:textSize="12sp" />
 
         <!-- overallTurnCountEND -->
         <TextView
             android:id="@+id/TurnCountText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="0"
+            android:layout_row="1"
             android:layout_column="0"
             android:text="Turn Count: "
             android:textColor="@color/main_black"
@@ -43,7 +64,7 @@
             android:id="@+id/TurnCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="0"
+            android:layout_row="1"
             android:layout_column="1"
             android:text="TurnCount"
             android:textColor="#f1e6b2"
@@ -54,7 +75,7 @@
             android:id="@+id/StartingPlayerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="1"
+            android:layout_row="2"
             android:layout_column="0"
             android:text="Starting Player: "
             android:textColor="@color/main_black"
@@ -64,7 +85,7 @@
             android:id="@+id/StartingPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="1"
+            android:layout_row="2"
             android:layout_column="1"
             android:text="StartingPlayer"
             android:textColor="#f1e6b2"
@@ -75,7 +96,7 @@
             android:id="@+id/winningPlayerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="2"
+            android:layout_row="3"
             android:layout_column="0"
             android:text="Winning Player: "
             android:textColor="@color/main_black"
@@ -85,7 +106,7 @@
             android:id="@+id/winningPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="2"
+            android:layout_row="3"
             android:layout_column="1"
             android:text="winningPlayer"
             android:textColor="#f1e6b2"
@@ -96,7 +117,7 @@
             android:id="@+id/MostValuableCardText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="3"
+            android:layout_row="4"
             android:layout_column="0"
             android:text="Most ValuableCard: "
             android:textColor="@color/main_black"
@@ -106,7 +127,7 @@
             android:id="@+id/MostValuableCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="3"
+            android:layout_row="4"
             android:layout_column="1"
             android:text="MostValuableCard"
             android:textColor="#f1e6b2"
@@ -462,13 +483,40 @@
 
     </GridLayout>
 
+    <!-- GridLayout -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:background="#68656A"
+        android:layout_weight="0.3"
+        android:columnCount="3"
+        android:rowCount="1">
+
     <!-- Submit game -->
-    <Button
-        android:id="@+id/submitGameDB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/main_black"
-        android:text="Submit Game!" />
+        <Button
+            android:id="@+id/submitGameDB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/main_black"
+            android:layout_margin="8dp"
+            android:text="Submit Game" />
+
+    <!-- New game -->
+        <Button
+            android:id="@+id/startNewGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/main_black"
+            android:text=" Start new game" />
+
+        <Button
+            android:id="@+id/SendDB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/main_black"
+            android:text="Send DB" />
+    </GridLayout>
 
 </LinearLayout>
