@@ -2,17 +2,30 @@ package com.example.cmdrtracker;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class EndGameScreen extends AppCompatActivity {
 
     DatabaseHelper myDB;
     public int player1win, player2win, player3win, player4win;
     public int player1start, player2start, player3start, player4start;
+    public int player1Life, player2Life, player3Life, player4Life;
+    public int player1Time, player2Time, player3Time, player4Time;
+    public int overallTurnCount;
 
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +75,26 @@ public class EndGameScreen extends AppCompatActivity {
         player3start = (player3Name != null && player3Name.equals(StartingPlayerName)) ? 1 : 0;
         player4start = (player4Name != null && player4Name.equals(StartingPlayerName)) ? 1 : 0;
 
+
+        // Initialize the "Submit Game" button
+        Button submitGameToDBButton = findViewById(R.id.submitGameDB);
+
+        submitGameToDBButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(EndGameScreen.this, R.style.CustomAlertDialogTheme)
+                    .setTitle("Submit Game!")
+                    .setMessage("Are you sure you want to submit the game data?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // User confirmed, proceed with ending the game
+                        addGameDataEntries();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // User cancelled the dialog, just dismiss it
+                        dialog.dismiss();
+                    })
+                    .create()
+                    .show();
+        });
+
         // Use the player name as needed
         // For example, display it in a TextView
         ((TextView) findViewById(R.id.TurnCount)).setText(String.valueOf(overallTurnCount));
@@ -98,5 +131,43 @@ public class EndGameScreen extends AppCompatActivity {
         ((TextView) findViewById(R.id.Win4)).setText(String.valueOf(player4win));
         ((TextView) findViewById(R.id.Start4)).setText(String.valueOf(player4start));
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void addGameDataEntries() {
+        // Extract data from TextViews
+        String gameType = "Normal"; // Example: get this from a TextView or other source
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String date = today.format(dateFormatter);
+
+        String start = ((TextView) findViewById(R.id.StartingPlayer)).getText().toString();
+        String winType = "DefaultWinType"; // Example value
+        String deckLink = ""; // Example URL or other data source
+        String uploader = "Guy";
+        int gameID = myDB.getMaxGameId() + 1;
+        String mvCard = ((TextView) findViewById(R.id.MostValuableCard)).getText().toString();
+
+        // Player 1
+        String player1Name = ((TextView) findViewById(R.id.NamePlayer1)).getText().toString();
+        String player1Deck = ((TextView) findViewById(R.id.DeckPlayer1)).getText().toString();
+
+        // Player 2
+        String player2Name = ((TextView) findViewById(R.id.NamePlayer2)).getText().toString();
+        String player2Deck = ((TextView) findViewById(R.id.DeckPlayer2)).getText().toString();
+
+        // Player 3
+        String player3Name = ((TextView) findViewById(R.id.NamePlayer3)).getText().toString();
+        String player3Deck = ((TextView) findViewById(R.id.DeckPlayer3)).getText().toString();
+
+        // Player 4
+        String player4Name = ((TextView) findViewById(R.id.NamePlayer4)).getText().toString();
+        String player4Deck = ((TextView) findViewById(R.id.DeckPlayer4)).getText().toString();
+
+        // Add data to the database
+        myDB.addGameData(gameID,gameType, date,player1Name,player1Deck,start,player1win,overallTurnCount,winType,mvCard,player1Life,player1Time,deckLink,uploader);
+        //myDB.addGameData(gameID,gameType, date,player2Name,player2Deck,start,player2win,overallTurnCount,winType,mvCard,player2Life,player2Time,deckLink,uploader);
+        //myDB.addGameData(gameID,gameType, date,player3Name,player3Deck,start,player3win,overallTurnCount,winType,mvCard,player3Life,player3Time,deckLink,uploader);
+        //myDB.addGameData(gameID,gameType, date,player4Name,player4Deck,start,player4win,overallTurnCount,winType,mvCard,player4Life,player4Time,deckLink,uploader);
     }
 }
