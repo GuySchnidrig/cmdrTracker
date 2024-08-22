@@ -147,35 +147,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             int gameID,
             String gameType,
             String date,
-            String player_name,
-            String deck_name,
+            String playerName,
+            String deckName,
             String start,
             int win,
-            int win_turn,
-            String win_type,
-            String mv_card,
+            int winTurn,
+            String winType,
+            String mvCard,
             int life,
-            float time_total,
-            String deck_link,
+            float timeTotal,
+            String deckLink,
             String uploader) {
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("game_id", gameID);
-        values.put("game_type", gameType);
-        values.put("date", date);
-        values.put("player_name", player_name);
-        values.put("deck_name", deck_name);
-        values.put("start", start);
-        values.put("win", win);
-        values.put("win_turn", win_turn);
-        values.put("win_type", win_type);
-        values.put("mv_card", mv_card);
-        values.put("life", life);
-        values.put("time_total", time_total);
-        values.put("deck_link", deck_link);
-        values.put("uploader", uploader);
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("game_id", gameID);
+            values.put("game_type", gameType);
+            values.put("date", date);
+            values.put("player_name", playerName);
+            values.put("deck_name", deckName);
+            values.put("start", start);
+            values.put("win", win);
+            values.put("win_turn", winTurn);
+            values.put("win_type", winType);
+            values.put("mv_card", mvCard);
+            values.put("life", life);
+            values.put("time_total", timeTotal);
+            values.put("deck_link", deckLink);
+            values.put("uploader", uploader);
 
-        db.insert("game_data", null, values);
+            db.beginTransaction();
+            db.insert("game_data", null, values);
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            // Handle the exception, e.g., log it
+            e.printStackTrace();
+        } finally {
+            if (db != null && db.isOpen()) {
+                db.endTransaction();
+                db.close();
+            }
+        }
     }
+
 }
