@@ -24,7 +24,7 @@
     <Spinner
         android:id="@+id/player1Spinner"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_columnWeight="1"
         android:popupBackground="@color/main_white"/>
 
@@ -32,7 +32,7 @@
     <Spinner
         android:id="@+id/player2Spinner"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_columnWeight="1"
         android:popupBackground="@color/main_white"/>
 
@@ -40,7 +40,7 @@
     <Spinner
         android:id="@+id/player1SpinnerDeck"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_columnWeight="1"
         android:popupBackground="@color/main_white"/>
 
@@ -50,7 +50,7 @@
     <Spinner
         android:id="@+id/player2SpinnerDeck"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_columnWeight="1"
         android:popupBackground="@color/main_white"/>
 
@@ -58,14 +58,14 @@
     <Spinner
         android:id="@+id/player3Spinner"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_columnWeight="1"
         android:popupBackground="@color/main_white"/>
     <!-- Player 4 Name -->
     <Spinner
         android:id="@+id/player4Spinner"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_columnWeight="1"
         android:popupBackground="@color/main_white"/>
 
@@ -73,7 +73,7 @@
     <Spinner
         android:id="@+id/player3SpinnerDeck"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_columnWeight="1"
         android:popupBackground="@color/main_white"/>
 
@@ -81,7 +81,7 @@
     <Spinner
         android:id="@+id/player4SpinnerDeck"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_columnWeight="1"
         android:popupBackground="@color/main_white"/>
 
@@ -110,11 +110,11 @@
     <Spinner
         android:id="@+id/startingPlayerSpinner"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="34dp"
         android:layout_columnWeight="1"
         android:layout_marginTop="8dp"
-        android:text="Set Starting Player"
-        android:popupBackground="@color/main_white"/>
+        android:popupBackground="@color/main_white"
+        android:text="Set Starting Player" />
 
     <!-- Submit Deck -->
     <Button
