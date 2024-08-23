@@ -103,6 +103,26 @@ public class EndGameScreen extends AppCompatActivity {
                     .show();
         });
 
+
+        // Initialize the "Submit Game" button
+        Button ViewGameStatsDBButton = findViewById(R.id.viewGameStats);
+
+        ViewGameStatsDBButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(EndGameScreen.this, R.style.CustomAlertDialogTheme)
+                    .setTitle("View Game Stats?")
+                    .setMessage("You want to leave submit Screen and view all game stats?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // User confirmed, proceed with ending the game
+                        changeViewToGameStats();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // User cancelled the dialog, just dismiss it
+                        dialog.dismiss();
+                    })
+                    .create()
+                    .show();
+        });
+
         // Initialize the "Submit Game" button
         Button shareDBButton = findViewById(R.id.SendDB);
 
@@ -221,5 +241,13 @@ public class EndGameScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void changeViewToGameStats() {
+            // Create an Intent to start the new activity
+            Intent intent = new Intent(EndGameScreen.this, GameStatsView.class);
 
+            // Start the new activity
+            startActivity(intent);
+    }
 }
+
+

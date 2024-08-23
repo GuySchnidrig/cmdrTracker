@@ -51,6 +51,13 @@
             android:theme="@style/Theme.CmdrTracker">
         </activity>
 
+        <activity android:name=".GameStatsView"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.CmdrTracker">
+        </activity>
+
+
 
     </application>
 

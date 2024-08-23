@@ -116,6 +116,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+
     public void addPlayer(String playerName) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

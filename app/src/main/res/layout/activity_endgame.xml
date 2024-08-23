@@ -489,7 +489,7 @@
         android:layout_height="27dp"
         android:background="#68656A"
         android:layout_weight="0.3"
-        android:columnCount="3"
+        android:columnCount="4"
         android:rowCount="1">
 
     <!-- Submit game -->
@@ -510,6 +510,15 @@
             android:backgroundTint="@color/main_black"
             android:text=" Start new game" />
 
+        <!-- Game Stats -->
+        <Button
+            android:id="@+id/viewGameStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/main_black"
+            android:text="View Game Stats" />
+        <!-- Send DB -->
         <Button
             android:id="@+id/SendDB"
             android:layout_width="wrap_content"
