@@ -106,7 +106,6 @@ public class EndGameScreen extends AppCompatActivity {
 
         // Initialize the "Submit Game" button
         Button ViewGameStatsDBButton = findViewById(R.id.viewGameStats);
-
         ViewGameStatsDBButton.setOnClickListener(v -> {
             new AlertDialog.Builder(EndGameScreen.this, R.style.CustomAlertDialogTheme)
                     .setTitle("View Game Stats?")
@@ -126,6 +125,24 @@ public class EndGameScreen extends AppCompatActivity {
         // Initialize the "Submit Game" button
         Button shareDBButton = findViewById(R.id.SendDB);
 
+        // Initialize the "New Game" button
+        Button restartButton = findViewById(R.id.startNewGame);
+        restartButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(EndGameScreen.this, R.style.CustomAlertDialogTheme)
+                    .setTitle("Restart?")
+                    .setMessage("You want to restart the app and start a new game?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // User confirmed, proceed with ending the game
+                        myDB.close();
+                        restartApp();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // User cancelled the dialog, just dismiss it
+                        dialog.dismiss();
+                    })
+                    .create()
+                    .show();
+        });
 
         // Use the player name as needed
         // For example, display it in a TextView
@@ -247,6 +264,15 @@ public class EndGameScreen extends AppCompatActivity {
 
             // Start the new activity
             startActivity(intent);
+    }
+
+    private void restartApp() {
+        Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
+        if (intent != null) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish(); // Optional: finish the current activity
+        }
     }
 }
 
