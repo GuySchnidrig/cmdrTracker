@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
     TextView player1Deck, player2Deck, player3Deck, player4Deck;
     TextView player1Time, player2Time, player3Time, player4Time;
     TextView overallTurnCountTextView; // Add TextView for overall turn count
-    TextView StartingPlayerName, errorTextView ;
+    TextView StartingPlayerName, errorTextView;
 
     private String winningPlayer;
-    private String MVCard;
+    private String MVCard, winType, selectedWinType;
 
     private static final int PLAYER_INPUT_REQUEST = 1;
     private final int[] turnOrder = {0, 2, 3, 1}; // Define the custom order
@@ -525,7 +525,7 @@ public class MainActivity extends AppCompatActivity {
                 // Handle the entered most valuable card
                 // For example, you can store the card in a variable or perform some logic with it
                 // Call endGame() after handling the input
-                endGame();
+                showWinTypeDialog();
             } else {
                 // Handle the case where the user didn't enter anything
                 Toast.makeText(MainActivity.this, "Please enter a card name", Toast.LENGTH_SHORT).show();
@@ -539,12 +539,45 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show(); // Create and show the dialog
     }
 
+
+    private void showWinTypeDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.CustomAlertDialogTheme);
+        builder.setTitle("Select Win Type");
+
+        // Define the win types you want to present as options
+        final String[] winTypes = {"Combat Damage", "Non-Combat Damage", "Combo", "Commander Damage"};
+
+        // Set the single-choice items
+        builder.setSingleChoiceItems(winTypes, -1, (dialog, which) -> {
+            // `which` gives the index of the selected item
+            selectedWinType = winTypes[which];
+        });
+
+        // Set up the positive button to handle the selection
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            if (selectedWinType != null) {
+                endGame(); // Call endGame to handle the transition
+            } else {
+                Toast.makeText(MainActivity.this, "Please select a win type.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Set up the negative button to cancel the dialog
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
+            dialog.dismiss(); // Close the dialog if the user cancels
+        });
+
+        // Create and show the dialog
+        builder.create().show();
+    }
+
     private void endGame() {
         // Get the text from the TextView
         int overallTurnCountEND = overallTurnCount;
         String StartingPlayerNameEND = StartingPlayerName.getText().toString();
         String winningPlayerEND = winningPlayer;
         String MVCardEND = MVCard;
+        String winTypeEND = selectedWinType;
 
         String player1NameEND = player1Name.getText().toString();
         String player1DeckEND = player1Deck.getText().toString();
@@ -574,6 +607,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("StartingPlayerNameEND", StartingPlayerNameEND);
         intent.putExtra("winningPlayerEND", winningPlayerEND);
         intent.putExtra("MVCardEND", MVCardEND);
+        intent.putExtra("winTypeEND", winTypeEND);
 
         intent.putExtra("player1NameEND", player1NameEND);
         intent.putExtra("player1DeckEND", player1DeckEND);

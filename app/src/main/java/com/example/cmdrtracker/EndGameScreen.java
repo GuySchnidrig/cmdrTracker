@@ -30,7 +30,7 @@ public class EndGameScreen extends AppCompatActivity {
 
     public float player1Time, player2Time, player3Time, player4Time;
     public int overallTurnCount, overallTurnCountT;
-    public String game_id, date;
+    public String game_id, date, winType;
 
     public String player1Name, player2Name, player3Name, player4Name;
     public String player1Deck, player2Deck, player3Deck, player4Deck;
@@ -51,6 +51,8 @@ public class EndGameScreen extends AppCompatActivity {
         String StartingPlayerName = intent.getStringExtra("StartingPlayerNameEND");
         String winningPlayer = intent.getStringExtra("winningPlayerEND");
         String MVCard = intent.getStringExtra("MVCardEND");
+        String winType = intent.getStringExtra("winTypeEND");
+
 
         String player1Name = intent.getStringExtra("player1NameEND");
         String player1Deck = intent.getStringExtra("player1DeckEND");
@@ -174,6 +176,7 @@ public class EndGameScreen extends AppCompatActivity {
         ((TextView) findViewById(R.id.winningPlayer)).setText(winningPlayer);
         ((TextView) findViewById(R.id.MostValuableCard)).setText(MVCard);
         ((TextView) findViewById(R.id.GameIdentity)).setText(game_id);
+        ((TextView) findViewById(R.id.WinType)).setText(winType);
 
         ((TextView) findViewById(R.id.NamePlayer1)).setText(player1Name);
         ((TextView) findViewById(R.id.DeckPlayer1)).setText(player1Deck);
@@ -215,7 +218,7 @@ public class EndGameScreen extends AppCompatActivity {
         LocalDate today = LocalDate.now();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String date = today.format(dateFormatter);
-        String winType = "DefaultWinType"; // Example value
+        String winType = ((TextView) findViewById(R.id.WinType)).getText().toString();; // Example value
         String deckLink = ""; // Example URL or other data source
         String uploader = "Guy";
         String mvCard = ((TextView) findViewById(R.id.MostValuableCard)).getText().toString();

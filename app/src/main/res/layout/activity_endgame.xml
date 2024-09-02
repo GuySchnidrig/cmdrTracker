@@ -26,7 +26,7 @@
         android:layout_weight="0.5"
 
         android:columnCount="4"
-        android:rowCount="5">
+        android:rowCount="6">
 
         <!-- Game ID -->
         <TextView
@@ -112,7 +112,7 @@
             android:textColor="#f1e6b2"
             android:textSize="12sp" />
 
-        <!-- Winning Player -->
+        <!-- MVC -->
         <TextView
             android:id="@+id/MostValuableCardText"
             android:layout_width="wrap_content"
@@ -132,12 +132,33 @@
             android:text="MostValuableCard"
             android:textColor="#f1e6b2"
             android:textSize="12sp" />
+
+        <!-- Wintype -->
+        <TextView
+            android:id="@+id/WinTypeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="5"
+            android:layout_column="0"
+            android:text="Win Type: "
+            android:textColor="@color/main_black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/WinType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="5"
+            android:layout_column="1"
+            android:text="WinType"
+            android:textColor="#f1e6b2"
+            android:textSize="12sp" />
     </GridLayout>
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:columnCount="10"
         android:rowCount="5"
         android:background="#68656A">
