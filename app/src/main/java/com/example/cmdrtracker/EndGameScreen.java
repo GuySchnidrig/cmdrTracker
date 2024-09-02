@@ -128,7 +128,7 @@ public class EndGameScreen extends AppCompatActivity {
         });
 
 
-        // Initialize the "Submit Game" button
+        // Initialize the "viewGameStats" button
         Button ViewGameStatsDBButton = findViewById(R.id.viewGameStats);
         ViewGameStatsDBButton.setOnClickListener(v -> {
             new AlertDialog.Builder(EndGameScreen.this, R.style.CustomAlertDialogTheme)
@@ -146,7 +146,7 @@ public class EndGameScreen extends AppCompatActivity {
                     .show();
         });
 
-        // Initialize the "Submit Game" button
+        // Initialize the "shareDBButton" button
         Button shareDBButton = findViewById(R.id.SendDB);
 
         // Initialize the "New Game" button
@@ -278,10 +278,6 @@ public class EndGameScreen extends AppCompatActivity {
 
         // Optionally, you could show a message or take other actions after adding the game data
         Toast.makeText(this, "Game data submitted!", Toast.LENGTH_SHORT).show();
-
-        // Start PlayerInputActivity
-        Intent intent = new Intent(this, PlayerInputActivity.class);
-        startActivity(intent);
     }
 
     private void changeViewToGameStats() {

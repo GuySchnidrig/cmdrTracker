@@ -21,7 +21,7 @@ public class GameStatsView extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
         // Example query to get data from your database
-        cursor = myDB.getReadableDatabase().rawQuery("SELECT * FROM game_data ORDER BY game_id DESC", null);
+        cursor = myDB.getReadableDatabase().rawQuery("SELECT * FROM game_data ORDER BY id DESC", null);
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
