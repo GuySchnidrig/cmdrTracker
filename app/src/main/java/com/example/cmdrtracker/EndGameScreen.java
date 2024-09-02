@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
+
 
 public class EndGameScreen extends AppCompatActivity {
 
@@ -28,7 +30,7 @@ public class EndGameScreen extends AppCompatActivity {
 
     public float player1Time, player2Time, player3Time, player4Time;
     public int overallTurnCount, overallTurnCountT;
-    public int game_id;
+    public String game_id, date;
 
     public String player1Name, player2Name, player3Name, player4Name;
     public String player1Deck, player2Deck, player3Deck, player4Deck;
@@ -44,6 +46,7 @@ public class EndGameScreen extends AppCompatActivity {
 
         // Retrieve the player name from the Intent
         Intent intent = getIntent();
+
         int overallTurnCount = intent.getIntExtra("overallTurnCountEND", 0);
         String StartingPlayerName = intent.getStringExtra("StartingPlayerNameEND");
         String winningPlayer = intent.getStringExtra("winningPlayerEND");
@@ -70,6 +73,25 @@ public class EndGameScreen extends AppCompatActivity {
         String player4Deck = intent.getStringExtra("player4DeckEND");
         int player4Life = intent.getIntExtra("player4LifeEND", 0);
         float player4Time = intent.getFloatExtra("player4TimeEND", 0.00f);
+
+
+        // Get the current date
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMdd"); // Use yyyyMMdd format
+        String date = today.format(dateFormatter);
+
+        // Generate a random 3-character suffix
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder randomSuffix = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < 6; i++) {
+            int index = random.nextInt(characters.length());
+            randomSuffix.append(characters.charAt(index));
+        }
+
+        // Combine the date string with the random suffix
+        String game_id = date + randomSuffix.toString();
 
         // Check if each player is the winning player and update their score
         player1win = (player1Name != null && player1Name.equals(winningPlayer)) ? 1 : 0;
@@ -151,7 +173,7 @@ public class EndGameScreen extends AppCompatActivity {
         ((TextView) findViewById(R.id.StartingPlayer)).setText(StartingPlayerName);
         ((TextView) findViewById(R.id.winningPlayer)).setText(winningPlayer);
         ((TextView) findViewById(R.id.MostValuableCard)).setText(MVCard);
-        ((TextView) findViewById(R.id.GameIdentity)).setText(String.valueOf(game_id));
+        ((TextView) findViewById(R.id.GameIdentity)).setText(game_id);
 
         ((TextView) findViewById(R.id.NamePlayer1)).setText(player1Name);
         ((TextView) findViewById(R.id.DeckPlayer1)).setText(player1Deck);
@@ -197,6 +219,7 @@ public class EndGameScreen extends AppCompatActivity {
         String deckLink = ""; // Example URL or other data source
         String uploader = "Guy";
         String mvCard = ((TextView) findViewById(R.id.MostValuableCard)).getText().toString();
+        String game_id = ((TextView) findViewById(R.id.GameIdentity)).getText().toString();
 
         // Extract the overallTurnCount from TextView to ensure consistency
         String overallTurnCountString = ((TextView) findViewById(R.id.TurnCount)).getText().toString();

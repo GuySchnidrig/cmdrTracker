@@ -131,7 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert("deck_names", null, values);
     }
 
-public long addGameData(int game_ID,
+public long addGameData(String game_ID,
                        String gameType,
                        String date,
                        String playerName,
