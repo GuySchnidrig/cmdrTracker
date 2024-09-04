@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "cmdr_tracker.db"; // Use your existing database name
+    private static final String DATABASE_NAME = "cmdr_tracker_v2.db"; // Use your existing database name
     private static final int DATABASE_VERSION = 1;
     private static String DATABASE_PATH = "";
     private final Context context;
