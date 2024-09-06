@@ -18,7 +18,7 @@ To run CMD Tracker, you need to have Android Studio installed. Follow these step
 Clone the Repository:
 
 ``` bash
-git clone https://github.com/yourusername/cmdrtracker.git
+git clone https://github.com/GuySchnidrig/cmdrtracker.git
 ```
 ### Open the Project:
 
