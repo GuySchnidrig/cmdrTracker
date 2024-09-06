@@ -3,6 +3,7 @@
 cmdrTracker is an Android application designed to assist with tracking the status of players in a commander game (magic the gathering). 
 It allows players to manage life totals, keep track of game time, and handle turns with customizable order. 
 The application also supports end-of-game scenarios, including selecting a winning player, selecting win type and recording the most valuable card (MVCard).
+![image](https://github.com/user-attachments/assets/db612227-4c34-4fe3-b51e-39cd892ae754)
 
 ## Features
 - **Life Total Tracking**: Increment or decrement life totals for up to four players.
@@ -33,6 +34,7 @@ Start the Application:
 
 Launch the application on your Android device or emulator.
 Enter Player Information:
+![image](https://github.com/user-attachments/assets/aebc8c05-d1b4-4e96-bb08-a5fd7e49cef4)
 
 On the initial screen, enter the names and deck details for up to four players. Choose the starting player position.
 Manage Life Totals:
