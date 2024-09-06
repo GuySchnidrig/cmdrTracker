@@ -13,7 +13,7 @@ The application also supports end-of-game scenarios, including selecting a winni
 - **End Game Functionality**: Allows players to end the game, select a winning player, and record the MVCard and win type.
 
 ## Installation
-To run CMD Tracker, you need to have Android Studio installed. Follow these steps:
+To run cmdrTracker, you need to have Android Studio installed. Follow these steps:
 
 Clone the Repository:
 
